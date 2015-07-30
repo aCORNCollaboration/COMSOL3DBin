@@ -1,0 +1,17 @@
+COMSOL3DBin Notes Summer 2015
+
+7/29/15
+
+COMSOL3DBin has been used happily for a year. I now want to improve the
+smoothing. I implemented quadrant averaging a long time ago and it made a
+significant improvement in the data smoothness. Now I want to add a much more
+robust smoothing using the Gauss-Seidel algorithm.
+
+I have a non-isotropic version of Gauss-Seidel running so I should be able
+to add it into COMSOL3DBin quite easily.
+
+The basic strategy is simple. I just implement a new smoothing routine just
+like the quadrant smoother BUT there is the complication of needing a secondary
+array to control the process and of filling that array from the geometry. The
+main effect is that the flag to turn on GS smoothing will also need to specify
+a geometry file to use. Let's add that code first.'
