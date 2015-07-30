@@ -14,4 +14,41 @@ The basic strategy is simple. I just implement a new smoothing routine just
 like the quadrant smoother BUT there is the complication of needing a secondary
 array to control the process and of filling that array from the geometry. The
 main effect is that the flag to turn on GS smoothing will also need to specify
-a geometry file to use. Let's add that code first.'
+a geometry file to use. Let's add that code first.
+
+I have ported much of the C++ code to C. I am going to have to add some code
+to COMSOLData3d.c to implement some helper functions that I put in Smoothable
+when I wrote in C++. These need access to the bounds info from the CD3Data so
+they make sense to add as methods there.
+
+OK, so I have a draft code. It is complex enough that it is unlikely to work
+first, second, or fifteenth time. But it is testable. If I have some data to
+test it on!
+
+I want a really simple chunk to test on using an array with cubes in the usual
+way but with the three components pointing in three different directions.
+Alas I am not sure how to create such a thing except programmatically. So I
+guess I need a different way to call the driver. Too hard, just do it by hand
+YUCK!
+
+I built it and got really silly results. I fixed a whole bunch of index
+problems and the results now look perfectly correct!
+
+I did a bunch of tests on the MacPro and with the tests the smoother appears
+to be working perfectly.
+
+Before I can actually start to use it I need to implement some more geometric
+primitives. I need torii and external cylinders.
+You know, one very general way to handle the geometry would be simply to scan
+through every element in the array and ask the geometry if it was active or
+passive. It is a lot easier to implement an IsContainedIn method than it is
+to run over the points that are inside a complex geometric shape.
+
+OK, I am going to make a copy of the whole directory structure at this point
+and then start a new project to continue this and to experiment with source
+control.
+
+I have created a GitHub account and have downloaded the GitHub Desktop app.
+I dragged the COMSOL3DBin top level folder into the Desktop and it converted
+the folder into a repository. Then I published the repository to GitHub. Now
+I am trying to figure out how to alter stuff.

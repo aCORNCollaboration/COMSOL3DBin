@@ -9,6 +9,13 @@
 //  (in a CD3List) and know how to alter the values in the pointType
 //  array of a storable to mark some regions as boundaries.
 //
+//  BCollett 7/30/15 Alter the way that Geometries work. Instead of being
+//  able to alter a pointType array all they know how to do is tell the
+//  world whether a point is inside or outside the geometry. The array
+//  takes care of passing in relevant points and updating the arrays.
+//  To make this more efficient each Geometry adds the idea of a BoundingBox
+//  that can be queried by the outside world.
+//
 //  Created by Brian Collett on 7/27/15.
 //  Copyright (c) 2015 Brian Collett. All rights reserved.
 //
