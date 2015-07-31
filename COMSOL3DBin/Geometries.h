@@ -16,7 +16,8 @@
 //  world whether a point is inside or outside the geometry. The array
 //  takes care of passing in relevant points and updating the arrays.
 //  To make this more efficient each Geometry adds the idea of a BoundingBox
-//  that can be queried by the outside world.
+//  that can be queried by the outside world. Restructured the Geom
+//  parameters into named groups at the same time.
 //
 //  Created by Brian Collett on 7/27/15.
 //  Copyright (c) 2015 Brian Collett. All rights reserved.
@@ -31,26 +32,49 @@
 //
 //  Some simple structures to make it easier to work with 3D objects.
 //  These parallel the C++ versions in my more usual
+//
+typedef struct Point3DTag {
+  double m[3];
+} Point3D;
 
+typedef struct Vector3DTag {
+  double m[3];
+} Vector3D;
+//
+//  Access macros
+//
+#define mX(p) (p)->m[0]
+#define mY(p) (p)->m[1]
+#define mZ(p) (p)->m[2]
+
+typedef struct Box3DTag {
+  Point3D mMin;
+  Point3D mMax;
+} Box3D;
 //
 //	Enum for the different kinds of OpenGL command that can be
 //	found in a .gla file.
 //
 typedef enum {
   kSD3Empty = 0,
-  kSD3ICyl,
-  kSD3End,     // end of geometry. Allows sharing geom file with other.
+  kSD3ICyl,     // Volume inside a cylinder aligned with axes.
+  kSD3ITorus,   // Volume inside a square-sectioned torus
+  kSD3End,      // end of geometry. Allows sharing geom file with other.
   kSD3Error
 } SD3Command;
 
 //
 //  Structures holding representations of individual geometries.
-//  Since the base class is abstract no-one can ever make one.
+//
 typedef struct GeomTag {
   int mId;
   struct GeomTag* mNext;
-  int mAxis;        // 0-2
-  double mParams[20];
+  Box3D mBounds;
+  Point3D mMin;
+  Point3D mMax;
+  int mAxis;            // Our axis, if have one, is parallel to this
+  double mR1Squared;    // Store radii as squares
+  double mR2Squared;    // Torii have two.
 } Geom;
 //
 int GeomInit(Geom* g, int id);
@@ -60,13 +84,22 @@ int GeomFinish(Geom* g);
 //
 void GeomPrintOn(Geom* g, FILE* ofp);
 //
+//  Individual actual geometries support a few more functions.
+//
+//
 //  Constructor for an ICylinder.
 //
 void ICylinderInit(Geom* g, int axis, double* args);
 //
+//  ICylinderPointIn returns true of the point falls inside
+//  the cylinder itself.
+//
+int ICylinderPointIn(Geom* g, Point3D* p);
+//
+//  Old form functionality removed 7/30/15
 //  Add to a type array.
 //
-int ICylinderAddTo(Geom* g, uint8_t* type, CD3Data* d);
+//int ICylinderAddTo(Geom* g, uint8_t* type, CD3Data* d);
 
 //
 //  Access names for the parameters for a cylinder

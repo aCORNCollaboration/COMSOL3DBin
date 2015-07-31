@@ -204,8 +204,33 @@ void CD3ListPrintOn(CD3List* l, FILE* ofp)
   fprintf(ofp, "CD3List end\n");
 }
 //
-//  Write into a Smoothable.
+//  Tell caller whether a point is inside the geometry (and
+//  thus inactive) or not.
 //
+int CD3ListPointIn(CD3List* l, Point3D* p)
+{
+  Geom* g = NULL;
+  int test;
+  for (g = l->mGList; NULL != g; g = g->mNext) {
+    test = false;
+    switch (g->mId) {
+      case kSD3ICyl:
+        test = ICylinderPointIn(g, p);
+        break;
+
+      default:
+        fprintf(stderr, "Unsupported geometry type %d.\n", g->mId);
+        break;
+    }
+    if (test) {   // As soon as we see inside we are done
+      return true;
+    }
+  }
+  return false;
+}
+/*
+ *  Write into a Smoothable.
+ *
 bool CD3ListAddGeomTo(CD3List* l, uint8_t* type, CD3Data* d)
 {
   Geom* g = NULL;
@@ -214,7 +239,7 @@ bool CD3ListAddGeomTo(CD3List* l, uint8_t* type, CD3Data* d)
       case kSD3ICyl:
         ICylinderAddTo(g, type, d);
         break;
-        
+
       default:
         fprintf(stderr, "Unsupported geometry type %d.\n", g->mId);
         break;
@@ -222,4 +247,4 @@ bool CD3ListAddGeomTo(CD3List* l, uint8_t* type, CD3Data* d)
   }
   return true;
 }
-
+*/

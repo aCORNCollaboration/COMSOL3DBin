@@ -20,6 +20,7 @@
 //  Copyright (c) 2015 Brian Collett. All rights reserved.
 //
 //#include "Smooth3D.h"
+#include <math.h>
 #include <stdlib.h>
 #include "assert.h"
 #include "Geometries.h"
@@ -46,15 +47,15 @@ int GeomFinish(Geom* g)
 //
 void GeomPrintOn(Geom* g, FILE* ofp)
 {
-  double* args = g->mParams;
-  assert(NULL != args);
+  assert(NULL != ofp);
+  assert(NULL != g);
   switch(g->mId) {
     case kSD3ICyl:
       fprintf(ofp, "ICylinder from (%lfm %lf, %lf) to (%lf, %lf, %lf)\n",
-              args[kICylXMin], args[kICylYMin], args[kICylZMin],
-              args[kICylXMax], args[kICylYMax], args[kICylZMax]);
-      fprintf(ofp, "Axis direction %d, radius %lf, value %lf.\n",
-              g->mAxis, args[kICylRadius], args[kICylPotential]);
+              g->mMin.m[0], g->mMin.m[1], g->mMin.m[2],
+              g->mMax.m[0], g->mMax.m[1], g->mMax.m[1]);
+      fprintf(ofp, "Axis direction %d, radius %lf.\n",
+              g->mAxis, sqrt(g->mR1Squared));
       break;
 
     default:
@@ -72,7 +73,7 @@ ICylinder::ICylinder(int idx, double *args) : Geom(kSD3ICyl)
   }
   mRadius = args[6];
   mPotential = args[7];
-}
+}mMax[
 //
 //  Make printable
 void ICylinder::PrintOn(FILE* ofp)
@@ -81,20 +82,96 @@ void ICylinder::PrintOn(FILE* ofp)
  */
 //
 //  Constructor for an ICylinder.
+//  Copy the parameters into their proper places and compute
+//  the bounding box.
+//  Params xMin, yMin, zMin, xMax, yMax, zMax, radius
 //
 void ICylinderInit(Geom* g, int axis, double* args)
 {
   int i;
   GeomInit(g, kSD3ICyl);
-  for (i = 0; i < 7; i++) {
-    g->mParams[i] = args[i];
+  for (i = 0; i < 3; i++) {
+    g->mMin.m[i] = args[i];
+    g->mMin.m[i] = args[i+3];
   }
   g->mAxis = axis;
+  g->mR1Squared = args[6] * args[6];
+}
+//
+//  ICylinderPointIn returns true of the point falls inside
+//  the cylinder itself.
+//
+int ICylinderPointIn(Geom* g, Point3D* p)
+{
+  double dx, dy, dz, rsq;
+  switch (g->mAxis) {
+    case 0:
+      //
+      //  Tube parallel to x axis.
+      //  Start by testing x position.
+      //
+      if ((p->m[0] < g->mMin.m[0]) || (p->m[0] > g->mMax.m[0])) {
+        return false;
+      }
+      //
+      //  We're OK in the x direction. Try the radius.
+      //
+      dy = p->m[1] - g->mMin.m[1];
+      dz = p->m[2] - g->mMin.m[2];
+      rsq = dy*dy + dz*dz;
+      if  (rsq < g->mR1Squared) {
+        return true;
+      }
+      break;
+
+    case 1:
+      //
+      //  y axis.
+      //  Start by testing y position.
+      //
+      if ((p->m[1] < g->mMin.m[1]) || (p->m[1] > g->mMax.m[1])) {
+        return false;
+      }
+      //
+      //  We're OK in the y direction. Try the radius.
+      //
+      dx = p->m[0] - g->mMin.m[0];
+      dz = p->m[2] - g->mMin.m[2];
+      rsq = dx*dx + dz*dz;
+      if  (rsq < g->mR1Squared) {
+        return true;
+      }
+      break;
+
+    case 2:
+      //
+      //  Tube parallel to z axis.
+      //  Start by testing z position.
+      //
+      if ((p->m[2] < g->mMin.m[2]) || (p->m[2] > g->mMax.m[2])) {
+        return false;
+      }
+      //
+      //  We're OK in the z direction. Try the radius.
+      //
+      dx = p->m[0] - g->mMin.m[0];
+      dy = p->m[1] - g->mMin.m[1];
+      rsq = dx*dx + dy*dy;
+      if  (rsq < g->mR1Squared) {
+        return true;
+      }
+      break;
+
+    default:
+      fprintf(stderr, "INVALID AXIS %d\n", g->mAxis);
+      return false;
+  }
+  return false;
 }
 
-//
-//  Add to a type array.
-//
+/*
+ *  Add to a type array.
+ *
 int ICylinderAddTo(Geom* g, uint8_t* type, CD3Data* d)
 {
   uint32_t iMin[3], iMax[3];
@@ -125,14 +202,14 @@ int ICylinderAddTo(Geom* g, uint8_t* type, CD3Data* d)
       //
       fprintf(stderr, "ICylinder: x axis not supported yet.\n");
       break;
-      
+
     case 1:
       //
       //  y axis.
       //
       fprintf(stderr, "ICylinder: y axis not supported yet.\n");
       break;
-      
+
     case 2:
       //
       //  Tube parallel to z axis.
@@ -190,11 +267,11 @@ int ICylinderAddTo(Geom* g, uint8_t* type, CD3Data* d)
         }
       }
       break;
-      
+
     default:
       fprintf(stderr, "INVALID AXIS %d\n", g->mAxis);
       return false;
   }
   return true;
 }
-
+*/

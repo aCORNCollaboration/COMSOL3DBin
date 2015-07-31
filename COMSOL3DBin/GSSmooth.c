@@ -7,6 +7,10 @@
 //
 //  Created by Brian Collett on 7/29/15.
 //  Copyright (c) 2015 Brian Collett. All rights reserved.
+//  BCollett 7/30/15 Change the way we fill in the type array.
+//  We now run over the whole array and ask the geometry
+//  list whether each point is inside the geometry (inactive)
+//  or not.
 //
 
 #include <stdio.h>
@@ -20,8 +24,12 @@
 #include "CD3List.h"
 #include "Geometries.h"
 
-uint8_t* NewTypeArray(uint32_t nVal[3]);
-void SmoothPrintOn(CD3Data* d, uint8_t* type, FILE* ofp);
+//
+//  Helpers.
+//
+static uint8_t* NewTypeArray(uint32_t nVal[3]);
+static void SmoothPrintOn(CD3Data* d, uint8_t* type, FILE* ofp);
+static void AddGeometryTo(CD3Data* d, CD3List* l, uint8_t* type);
 
 int GSSmooth(const char* fname, CD3Data* dp, int nPass)
 {
@@ -76,7 +84,7 @@ int GSSmooth(const char* fname, CD3Data* dp, int nPass)
   //
   CD3ListInit(&gList);
   if (CD3ListReadGeom(&gList, fname)) {
-    CD3ListAddGeomTo(&gList, pointType, dp);
+    AddGeometryTo(dp, &gList, pointType);
   } else {
     fprintf(stderr, "Cannot read geometry from file %s.\n", fname);
     return kCDBadGeom;
@@ -230,6 +238,28 @@ void SmoothPrintOn(CD3Data* d, uint8_t* type, FILE* ofp)
         fprintf(ofp, "   ");
       }
       fprintf(ofp, "\n");
+    }
+  }
+}
+
+//
+//  AddGeometryTo runs over every point in the array asking the
+//  geometry whether the point is inside and thus should be
+//  made inactive.
+//  NOTE that it runs over it in real space and index space
+//  at the same time.
+//
+void AddGeometryTo(CD3Data* d, CD3List* l, uint8_t* type)
+{
+  Point3D p;
+  uint32_t ix, iy, iz;
+  for (iz = 0, p.m[2] = d->mMin[2]; iz < d->mNVal[2]; iz++, p.m[2] += d->mDelta[2]) {
+    for (iy = 0, p.m[1] = d->mMin[1]; iy < d->mNVal[1]; iy++, p.m[1] += d->mDelta[1]) {
+      for (ix = 0, p.m[0] = d->mMin[0]; ix < d->mNVal[0]; ix++, p.m[0] += d->mDelta[0]) {
+        if (CD3ListPointIn(l, &p)) {
+          type[(iz * d->mNVal[1] + iy) * d->mNVal[0] + ix] = 0;
+        }
+      }
     }
   }
 }

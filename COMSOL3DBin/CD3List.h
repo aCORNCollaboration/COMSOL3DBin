@@ -21,6 +21,11 @@
 //  The file is compiled into an internal representation (a simple list)
 //  I have forced 2-step construction because reading from a file can fail.
 //
+//  BCollett 7/30/15 switch from the model where the geometries add
+//  themselves to a pointArray to the model in which the smoother
+//  asks the list about each point in the array. Replace CD3ListAddTo
+//  by CD3ListPointIn.
+//
 //  Created by Brian Collett on 7/24/15.
 //  Copyright (c) 2015 Brian Collett. All rights reserved.
 //
@@ -61,9 +66,14 @@ bool CD3ListReadGeom(CD3List* l, const char* inFilename);
 //
 void CD3ListPrintOn(CD3List* l, FILE* ofp);
 //
+//  Tell caller whether a point is inside the geometry (and
+//  thus inactive) or not.
+//
+int CD3ListPointIn(CD3List* l, Point3D* p);
+//
 //  Write into a Smoothable.
 //
-bool CD3ListAddGeomTo(CD3List* l, uint8_t* type, CD3Data* d);
+//bool CD3ListAddGeomTo(CD3List* l, uint8_t* type, CD3Data* d);
 //
 //
 
