@@ -18,7 +18,7 @@
  *  and min values on each dimension.
  *
  *  To make this easier for Fred to use directly I am
- *  tranlating it to pure C.
+ *  translating it to pure C.
  *  To support 2D and 3D specialised sub-classes in C
  *  I have to do my own function overloading, which I do
  *  by ensuring that all methods in the base class have
@@ -28,12 +28,14 @@
 #ifndef COMSOLDATA_H
 #define COMSOLDATA_H
 
-#include <sys/cdefs.h>
+//#include <sys/cdefs.h>
 #include <stdio.h>
 #include <float.h>
 #include <stdbool.h>
 
-__BEGIN_DECLS
+#if defined(__cplusplus)
+extern "C" {
+#endif
 
 //
 //  These two kludgy globals are used to pass filenames to the binary
@@ -58,6 +60,7 @@ typedef enum CDErrorTag {
   kCDNotLeaf,
   kCDNot4Fold,
   kCDBadGeom,
+  kCDError
 } CDError;
 
 //
@@ -129,6 +132,8 @@ CDError CDParseHeader(FILE* ifp, CDData* dp);
 //
 void CDAnalyse(CDData* dp);
 //
-__END_DECLS
+#if defined(__cplusplus)
+}
+#endif
 
 #endif // COMSOLDATA_H

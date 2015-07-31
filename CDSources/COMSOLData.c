@@ -195,6 +195,7 @@ void CDFinish(CDData* dp)
  */
 double CDGetValueAtIndex(CDData* dp, unsigned int dim, unsigned int index[3])
 {
+  int idx;
   if (dim >= dp->mNDimension + dp->mNExpression) {
     return nan("");
   }
@@ -202,7 +203,7 @@ double CDGetValueAtIndex(CDData* dp, unsigned int dim, unsigned int index[3])
       (index[2] > dp->mRange[2].mNVal)) {
     return nan("");
   }
-  int idx = (index[2]*dp->mRange[1].mNVal+index[1])*dp->mRange[0].mNVal+index[0];
+  idx = (index[2]*dp->mRange[1].mNVal+index[1])*dp->mRange[0].mNVal+index[0];
   return dp->mDStore[dim][idx];
 }
 double CDGetValueAtPoint(CDData* dp, unsigned int dim, double coord[3])
@@ -266,7 +267,8 @@ CDError CDWriteBinaryTo(CDData* dp, const char* basename)
 {
   char fname[256];
   FILE* ofp;
-  for (int e = 0; e < dp->mNExpression + dp->mNDimension; e++) {
+  int e;
+  for (e = 0; e < dp->mNExpression + dp->mNDimension; e++) {
     sprintf(fname, "%s_%s.bin", basename, dp->mExprNames[e]);
     ofp = fopen(fname, "wb");
     if (NULL == ofp) {
@@ -405,6 +407,7 @@ void CDAnalyse(CDData* dp)
 {
   int nRep[3], d;
   double v;
+  int nPoint;
   /*
    *  Let's see if we can figure out the grid structure of the file.
    *  Any dimension can either be fixed or can vary.
@@ -431,7 +434,7 @@ void CDAnalyse(CDData* dp)
   //  Work backwards over the dimensions figuring our how many different
   //  values each takes.
   //
-  int nPoint = dp->mNLine;
+  nPoint = dp->mNLine;
   for (d = dp->mNDimension-1; d >= 0; d--) {
     if (dp->mRange[d].mActive) {
       dp->mRange[d].mNVal = nPoint / nRep[d];
@@ -446,5 +449,5 @@ void CDAnalyse(CDData* dp)
       dp->mRange[d].mDelta = 0.0;
     }
   }
-  
+
 }

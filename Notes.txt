@@ -52,3 +52,40 @@ I have created a GitHub account and have downloaded the GitHub Desktop app.
 I dragged the COMSOL3DBin top level folder into the Desktop and it converted
 the folder into a repository. Then I published the repository to GitHub. Now
 I am trying to figure out how to alter stuff.
+
+I have downloaded the project at home and created a CodeBlocks project
+alongside it (so that we don't clutter the source with products). It is
+objecting to sys/cdefs.h. It seems
+that I am just using it to shorthand the
+
+
+#if defined(__cplusplus)
+extern "C" {
+#endif
+
+#if defined(__cplusplus)
+}
+#endif
+
+brackets that allow you to use C headers in C++. I will just switch to the
+full form.
+
+Then I found several for (int i ) constructs that I missed. Corrected.
+I had used the nice construct
+
+static const int kMaxNFiles = 20;
+const char* gFilenames[kMaxNFiles];
+
+but I had to replace it with the older
+
+#define kMaxNFiles 20
+const char* gFilenames[kMaxNFiles];
+
+With that I am compiling. Turning on stronger warnings found a bunch of
+places where I put a declaration after the first executable. I fixed
+all those. I still have errors on the %lf and I64 formats as well as
+a bunch of // style comments that are not allowed under strict ISO90.
+
+That should be enough cleanup for now. maybe I should figure out how to
+commit these changes.
+

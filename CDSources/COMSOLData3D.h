@@ -83,7 +83,9 @@ typedef struct CD3HeadTag {
   char filler[0];           // On disk will be stored as 256 bytes.
 } CD3Header;
 
-__BEGIN_DECLS
+#if defined(__cplusplus)
+extern "C" {
+#endif
 //
 //  Init fills in the data structure using the information in a
 //  text file produced by COMSOL.
@@ -151,7 +153,9 @@ bool CD3Map(const CD3Data* dp, const double coord[3], uint32_t newIndices[3]);
 //
 uint64_t CD3IndexAt(const CD3Data* dp, uint32_t ix, uint32_t iy, uint32_t iz);
 
-__END_DECLS
+#if defined(__cplusplus)
+}
+#endif
 
 
 #endif /* defined(__COMSOLReader2__COMSOLData3D__) */

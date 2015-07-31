@@ -108,7 +108,7 @@ int GSSmooth(const char* fname, CD3Data* dp, int nPass)
           switch (pointType[rIndex]) {
             case 0:
               break;
-              
+
             case 1:
               for (comp = 0; comp < 3; comp++) {
                 newVal = wx*(a[index+dx+comp]+a[index-dx+comp])+
@@ -120,7 +120,7 @@ int GSSmooth(const char* fname, CD3Data* dp, int nPass)
                 a[index+comp] = newVal;
               }
               break;
-              
+
             default:
               fprintf(stderr, "Unknown element type at index %" PRIu64 ".\n", idx);
           }
@@ -136,7 +136,7 @@ int GSSmooth(const char* fname, CD3Data* dp, int nPass)
           switch (pointType[rIndex]) {
             case 0:
               break;
-              
+
             case 1:
               for (comp = 0; comp < 3; comp++) {
                 newVal = wx*(a[index+dx+comp]+a[index-dx+comp])+
@@ -148,7 +148,7 @@ int GSSmooth(const char* fname, CD3Data* dp, int nPass)
                 a[index+comp] = newVal;
               }
               break;
-              
+
             default:
               fprintf(stderr, "Unknown element type at index %" PRIu64 ".\n", idx);
           }
@@ -167,9 +167,9 @@ int GSSmooth(const char* fname, CD3Data* dp, int nPass)
 uint8_t* NewTypeArray(uint32_t nVal[3]) {
   uint8_t* pointType = NULL;
   uint64_t arraySize;
-  assert(NULL != nVal);
   uint32_t ix, iy, iz;
   uint32_t ixMax, iyMax, izMax;
+  assert(NULL != nVal);
   //
   //  Now get space for the point type array.
   //  Build size a bit at a time to avoid overflow.
@@ -180,7 +180,7 @@ uint8_t* NewTypeArray(uint32_t nVal[3]) {
   pointType = (uint8_t*) malloc(arraySize * sizeof(uint8_t));
   if (NULL == pointType) {
     return NULL;
-    
+
   }
   ixMax = nVal[0]-1;
   iyMax = nVal[1]-1;

@@ -39,7 +39,9 @@ int QuadAverage(CD3Data* cd);
 void DoCheck(const char* name);
 int DoFile(const char* filename);
 
-static const int kMaxNFiles = 20;
+//static const int kMaxNFiles = 20;   Not sure which version of C this needs
+#define kMaxNFiles 20
+
 bool gDoAverage = false;
 bool gCheckFile = false;
 bool gFEMMFile = false;
@@ -186,6 +188,7 @@ void DoCheck(const char* name)
 {
   uint32_t i, j, k;   // x, y, z indices
   uint32_t jmid, imid;
+  double eps;
   //
   //  First just a quick check that we are sane. This must be a leaf
   //  field.
@@ -208,7 +211,7 @@ void DoCheck(const char* name)
   // and the ranges must be centered on zero.
   // These can be inexact comparisons.
   //
-  double eps = 1.0e-6;
+  eps = 1.0e-6;
   if (fabs(dp->mMin[0] - dp->mMin[1]) > eps) {
     fprintf(stderr, "dp->mMin[0] %12.8g != dp->mMin[1] %12.8g\n",
             dp->mMin[0], dp->mMin[1]);
@@ -288,26 +291,26 @@ void DoCheck(const char* name)
 //
 int ProcessArguments(int argc, const char** argv)
 {
-  int iVal;
+  int iVal, argn;
   if (argc < 2) {
     fprintf(stderr, "No arguments given.\n");
     return 1;
   }
-  for (int argn = 1; argn < argc; argn++) {
+  for (argn = 1; argn < argc; argn++) {
     if (argv[argn][0] == '-') {
       switch (argv[argn][1]) {
         case 'c':
           gCheckFile = true;
           break;
-          
+
         case 'a':
           gDoAverage = true;
           break;
-          
+
         case 'f':
           gFEMMFile = true;
           break;
-          
+
         case 'n':
           if (argv[argn][2] == ':') {
             if (sscanf(&argv[argn][3], "%d", &iVal) == 1) {
@@ -317,13 +320,13 @@ int ProcessArguments(int argc, const char** argv)
             }
           }
           break;
-          
+
         case 's':
           if (argv[argn][2] == ':') {
             gGeomFilename = &argv[argn][3];
           }
           break;
-          
+
         default:
           fprintf(stderr, "Ignored unknown option %s.\n", argv[argn]);
           break;
@@ -423,7 +426,7 @@ int ProcessArguments(int argc, const char** argv)
  }
  return kCDNoErr;
  }
- 
+
  Here is the original QuadAverage code. It needs only a single pass
  over the data but requires that the grids be identical in the x and y
  directions.

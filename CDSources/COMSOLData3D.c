@@ -309,7 +309,7 @@ CDError CD3InitFEMM(CD3Data* dp, const char* fname)
       dp->mField[2*(row * dp->mStride + col)+1] = eyVals[col * nXCopy + row];
     }
   }
-  
+
   return kCDNoErr;
 }
 //
@@ -457,11 +457,11 @@ bool CD3WriteBinary(CD3Data* dp, FILE* ofp)
       case kCD3Data2:
         npoint *= 2;
         break;
-        
+
       case kCD3Data3:
         npoint *= 3;
         break;
-        
+
       default:
         fprintf(stderr, "CD3WriteBinary:Invalid file type %d.\n", dp->mType);
         return false;
@@ -568,11 +568,11 @@ bool CD3ReadBinary(CD3Data* dp, FILE* ifp)
     case kCD3Data2:
       npoint *= 2;
       break;
-      
+
     case kCD3Data3:
       npoint *= 3;
       break;
-      
+
     default:
       fprintf(stderr, "CD3ReadBinary:Invalid file type %d.\n", dp->mType);
       goto Finish;
@@ -740,7 +740,7 @@ static CDError Init2D(CD3Data* dp, const CDData* cdp)
         return kCDBadStructure;
       }
       break;
-      
+
     case 1:
       dp->mDelta[1] = dp->mDelta[0];
       dp->mStride = dp->mNVal[0];
@@ -763,7 +763,7 @@ static CDError Init2D(CD3Data* dp, const CDData* cdp)
         return kCDBadStructure;
       }
       break;
-      
+
   }
   //
   //  Now we know all the dimensions we know how much storage we need for
@@ -906,7 +906,7 @@ bool GetAxEAtPoint(const CD3Data* dp, const double coord[3], double* EField)
 {
   double coord2D[2];
   double field2D[2];
-  double sinval = 0.0, cosval = 0.0;
+  double sinval = 0.0, cosval = 0.0, r;
 //  double x = coord[0], y = coord[1], z = coord[2];
   //
   //  First check against 3D bounds.
@@ -921,7 +921,7 @@ bool GetAxEAtPoint(const CD3Data* dp, const double coord[3], double* EField)
   //
   //  Start by mapping from 3d point to 2D point.
   //
-  double r = sqrt(coord[0]*coord[0] + coord[1]*coord[1]);
+  r = sqrt(coord[0]*coord[0] + coord[1]*coord[1]);
   if (r > 0.0) {
     sinval = coord[1]/r;
     cosval = coord[0]/r;
@@ -1017,7 +1017,7 @@ bool Get2DEAtPoint(const CD3Data* dp, const double coord[2], double* EField)
   c1 = irc[0]*dp->mField[idx10+1] + rc[0]*dp->mField[idx11+1];
   EField[1] = irc[1] * c0 + rc[1] * c1;
   return true;
-  
+
 }
 
 /***********************************************************************
@@ -1036,7 +1036,7 @@ bool Get2DEAtPoint(const CD3Data* dp, const double coord[2], double* EField)
  }
  int idx = (((index[2]*dp->mNVal[1])+index[1])*dp->mNVal[1])+index[0];
  return dp->mField[3*idx + dim];
- 
+
  }
  double CD3GetValueAtPoint(const CD3Data* dp, unsigned int dim, const double coord[3])
  {
@@ -1115,17 +1115,17 @@ bool Get2DEAtPoint(const CD3Data* dp, const double coord[2], double* EField)
  c = irc[2] * c0 + rc[2] * c1;
  return c;
  }
- 
+
  double CD3GetExAtPoint(const CD3Data* dp, const double coord[3])
  {
  return CD3GetValueAtPoint(dp, 0, coord);
  }
- 
+
  double CD3GetEyAtPoint(const CD3Data* dp, const double coord[3])
  {
  return CD3GetValueAtPoint(dp, 1, coord);
  }
- 
+
  double CD3GetEzAtPoint(const CD3Data* dp, const double coord[3])
  {
  return CD3GetValueAtPoint(dp, 2, coord);
@@ -1136,7 +1136,8 @@ bool Get2DEAtPoint(const CD3Data* dp, const double coord[2], double* EField)
 
 void CD3ClipPt(const CD3Data* dp, const double coord[3], double newCoord[3])
 {
-  for (int i = 0; i < 3; i++) {
+  int i;
+  for (i = 0; i < 3; i++) {
     newCoord[i] = (coord[i] < dp->mMin[i]) ? dp->mMin[i] :
     ((coord[i] > dp->mMax[i]) ? dp->mMax[i] : coord[i]);
   }
@@ -1148,8 +1149,9 @@ void CD3ClipPt(const CD3Data* dp, const double coord[3], double newCoord[3])
 //
 bool CD3Map(const CD3Data* dp, const double coord[3], uint32_t newIndices[3])
 {
+  int i;
   if (PtInBounds(dp, coord)) {
-    for (int i = 0; i < 3; i++) {
+    for (i = 0; i < 3; i++) {
       newIndices[i] = (uint32_t) ((coord[i] - dp->mMin[i]) / dp->mDelta[i] + 0.5);
     }
     return true;
