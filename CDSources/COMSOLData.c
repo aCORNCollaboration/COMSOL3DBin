@@ -75,6 +75,10 @@ CDError CDInit(CDData* dp, const char* fname)
   CDError theErr;
   int line, expr, nExpr, i;
   size_t nChar;
+  dp->mExprNames = NULL;
+  dp->mDStore = NULL;
+  dp->mRange = NULL;
+  dp->mFileName = NULL;
   //
   //  Let's try to open the file for reading.
   //
@@ -168,7 +172,7 @@ CDError CDInit(CDData* dp, const char* fname)
 void CDFinish(CDData* dp)
 {
   int line;
-  if (dp->mNExpression > 0) {
+  if (NULL != dp->mExprNames) {
     free(dp->mExprNames);
   }
   if (dp->mNLine > 0) {
@@ -322,7 +326,7 @@ CDError CDParseHeader(FILE* ifp, CDData* dp)
   char headline[255];
   char option[32];
   static char modelName[256];
-  char ch;
+  char ch, *strp;
   int expr;
   //
   //  File is open. Read the header. Should be a 9 line
@@ -342,16 +346,44 @@ CDError CDParseHeader(FILE* ifp, CDData* dp)
     dp->mNHeadline++;
     fscanf(ifp, "%s", option);
     printf("Found header option %s on line %d.\n", option, dp->mNHeadline);
-    if (strcmp(option, "Dimension:") == 0) {
+    if (strcmp(option, "Version:") == 0) {
+      fgets(headline, 250, ifp);
+      printf("Skipped over %s\n", headline);
+    } else if (strcmp(option, "Date:") == 0) {
+      fgets(headline, 250, ifp);
+      printf("Skipped over %s\n", headline);
+    } else if (strcmp(option, "Description:") == 0) {
+      fgets(headline, 250, ifp);
+      printf("Skipped over %s\n", headline);
+    } else if (strcmp(option, "Length") == 0) {
+      fgets(headline, 250, ifp);
+      printf("Skipped over %s\n", headline);
+    } else if (strcmp(option, "Dimension:") == 0) {
       fscanf(ifp, "%d", &(dp->mNDimension));
+      fgets(headline, 250, ifp);
+      printf("Skipped over %s\n", headline);
     } else if (strcmp(option, "Nodes:") == 0) {
       fscanf(ifp, "%d", &(dp->mNLine));
+      fgets(headline, 250, ifp);
+      printf("Skipped over %s\n", headline);
     } else if (strcmp(option, "Expressions:") == 0) {
       fscanf(ifp, "%d", &(dp->mNExpression));
+      fgets(headline, 250, ifp);
+      printf("Skipped over %s\n", headline);
     } else if (strcmp(option, "Model:") == 0) {
-      fscanf(ifp, "%s", modelName);
+      //
+      //  Name may or may not be there. Read in rest of line and look
+      //
+      fgets(headline, 254, ifp);
+      strp = strtok(headline, " \t\r\n");
+      if (NULL != strp) {
+        strcpy(modelName, strp);
+        gModelFileName = modelName;
+      } else {
+        modelName[0] = 0; // empty name
+      }
       gModelFileName = modelName;
-    } else if (dp->mNHeadline == 9) {
+    } else if (strcmp(option, "x") == 0) {
       //
       //  Parse the line for variable names.
       //  Expect nDim 1 char names followed by
@@ -393,8 +425,6 @@ CDError CDParseHeader(FILE* ifp, CDData* dp)
         }
       }
 //    }
-    fgets(headline, 250, ifp);
-    printf("Skipped over %s\n", headline);
   }
   ungetc(ch, ifp);
   return kCDNoErr;

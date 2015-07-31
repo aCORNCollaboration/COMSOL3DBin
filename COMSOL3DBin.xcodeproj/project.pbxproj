@@ -52,7 +52,6 @@
 		1890C5311B6944550092B4EA /* CD3List.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CD3List.h; path = COMSOL3DBin/CD3List.h; sourceTree = SOURCE_ROOT; };
 		1890C5331B6946560092B4EA /* Geometries.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Geometries.c; sourceTree = "<group>"; };
 		1890C5341B6946560092B4EA /* Geometries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Geometries.h; sourceTree = "<group>"; };
-		1890C5361B69744C0092B4EA /* SDTest2Out.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SDTest2Out.txt; path = ../Smooth3D/Data/SDTest2Out.txt; sourceTree = "<group>"; };
 		18F6EB6E1B691CE4000F088B /* Notes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Notes.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -70,7 +69,6 @@
 		1801B9D218D232B4006B9829 = {
 			isa = PBXGroup;
 			children = (
-				1890C5361B69744C0092B4EA /* SDTest2Out.txt */,
 				18F6EB6E1B691CE4000F088B /* Notes.txt */,
 				1801B9DD18D232B5006B9829 /* COMSOL3DBin */,
 				1801B9DC18D232B5006B9829 /* Products */,

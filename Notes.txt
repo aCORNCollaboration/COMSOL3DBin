@@ -106,3 +106,16 @@ should be left active. The CD3List has to pass the question on to each
 of the Geoms in the list.
 
 That is all written. Commit it now and test tomorrow.
+
+Trying to test has shown up a pair of inter-related that I have
+previously ignored. A COMSOL file does not always hav a name on the
+Model line. If that name is missing then header processing goes
+completely screwy without any apparent warning AND you end up
+freeing an mExpNames array that has never been alloc'd. I propose
+to fix both.
+
+Fixed. I tweaked the way that cylinders decide whether points are
+inside to make sure that they are put in symmetrically. With that
+the system works beautifully, at least for interior cylinders.
+
+I now need to implement torii. But commit this first.

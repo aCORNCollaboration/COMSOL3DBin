@@ -25,6 +25,7 @@
 //  Copyright (c) 2015 Brian Collett. All rights reserved.
 //
 #include <stdio.h>
+#include <math.h>
 #include <string.h>
 #include <stdlib.h>
 #include "assert.h"
@@ -212,6 +213,9 @@ int CD3ListPointIn(CD3List* l, Point3D* p)
   Geom* g = NULL;
   int test;
   for (g = l->mGList; NULL != g; g = g->mNext) {
+    if ((fabs(p->m[0] - g->mMin.m[0]) <= 0.1) && (fabs(p->m[1] - g->mMin.m[1]) <= 0.1)) {
+      test = true;
+    }
     test = false;
     switch (g->mId) {
       case kSD3ICyl:

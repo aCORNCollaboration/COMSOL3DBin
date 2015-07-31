@@ -92,7 +92,7 @@ void ICylinderInit(Geom* g, int axis, double* args)
   GeomInit(g, kSD3ICyl);
   for (i = 0; i < 3; i++) {
     g->mMin.m[i] = args[i];
-    g->mMin.m[i] = args[i+3];
+    g->mMax.m[i] = args[i+3];
   }
   g->mAxis = axis;
   g->mR1Squared = args[6] * args[6];
@@ -104,6 +104,7 @@ void ICylinderInit(Geom* g, int axis, double* args)
 int ICylinderPointIn(Geom* g, Point3D* p)
 {
   double dx, dy, dz, rsq;
+  double  tolsq = 0.01 * 0.01;
   switch (g->mAxis) {
     case 0:
       //
@@ -119,7 +120,7 @@ int ICylinderPointIn(Geom* g, Point3D* p)
       dy = p->m[1] - g->mMin.m[1];
       dz = p->m[2] - g->mMin.m[2];
       rsq = dy*dy + dz*dz;
-      if  (rsq < g->mR1Squared) {
+      if  (rsq < g->mR1Squared + tolsq) {
         return true;
       }
       break;
@@ -138,7 +139,7 @@ int ICylinderPointIn(Geom* g, Point3D* p)
       dx = p->m[0] - g->mMin.m[0];
       dz = p->m[2] - g->mMin.m[2];
       rsq = dx*dx + dz*dz;
-      if  (rsq < g->mR1Squared) {
+      if  (rsq < g->mR1Squared + tolsq) {
         return true;
       }
       break;
@@ -148,7 +149,7 @@ int ICylinderPointIn(Geom* g, Point3D* p)
       //  Tube parallel to z axis.
       //  Start by testing z position.
       //
-      if ((p->m[2] < g->mMin.m[2]) || (p->m[2] > g->mMax.m[2])) {
+      if ((p->m[2] <= g->mMin.m[2]) || (p->m[2] >= g->mMax.m[2])) {
         return false;
       }
       //
@@ -157,7 +158,7 @@ int ICylinderPointIn(Geom* g, Point3D* p)
       dx = p->m[0] - g->mMin.m[0];
       dy = p->m[1] - g->mMin.m[1];
       rsq = dx*dx + dy*dy;
-      if  (rsq < g->mR1Squared) {
+      if  (rsq < g->mR1Squared + tolsq) {
         return true;
       }
       break;

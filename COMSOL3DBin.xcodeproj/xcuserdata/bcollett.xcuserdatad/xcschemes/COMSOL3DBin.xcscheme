@@ -44,7 +44,7 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "YES"
-      customWorkingDirectory = "/Users/bcollett/Development/Smooth3D/Data"
+      customWorkingDirectory = "/Volumes/aCORN/Research/aCORN/Smooth3D"
       buildConfiguration = "Debug"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
@@ -65,12 +65,16 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
+            argument = "-n:10"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
             argument = "-f"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-s:Test2Geom.txt"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-a"
@@ -78,7 +82,7 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-s:SD3Test1Geom.txt"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "MT2_25_14Xm6-6Ym6-6Z26-27.txt"
@@ -113,7 +117,11 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "S3DTest1EMed.txt"
+            argument = "S3DTest3ELow.txt"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "S3DTest3EMed.txt"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

@@ -78,7 +78,6 @@ int GSSmooth(const char* fname, CD3Data* dp, int nPass)
     fprintf(stderr, "Attempt to get storage for type array failed.\n");
     return kCDAllocFailed;
   }
-//  SmoothPrintOn(dp, pointType, stdout);
   //
   //  Read in the geometry
   //
@@ -89,6 +88,7 @@ int GSSmooth(const char* fname, CD3Data* dp, int nPass)
     fprintf(stderr, "Cannot read geometry from file %s.\n", fname);
     return kCDBadGeom;
   }
+//  SmoothPrintOn(dp, pointType, stdout);
   //
   //  And run the smooth.
   //
@@ -165,7 +165,7 @@ int GSSmooth(const char* fname, CD3Data* dp, int nPass)
     }
     fprintf(stderr, "Pass %d error = %lf.\n", pass, err);
   }
-//  SmoothPrintOn(dp, pointType, stdout);
+  SmoothPrintOn(dp, pointType, stdout);
   return errCode;
 }
 /*
@@ -218,6 +218,8 @@ uint8_t* NewTypeArray(uint32_t nVal[3]) {
   return pointType;
 }
 
+//#define ShowFields 1
+
 void SmoothPrintOn(CD3Data* d, uint8_t* type, FILE* ofp)
 {
   int i,j,k, c;
@@ -229,14 +231,16 @@ void SmoothPrintOn(CD3Data* d, uint8_t* type, FILE* ofp)
         fprintf(ofp, "%d", type[((k*d->mNVal[1] + j)*d->mNVal[0] +
                                   i)]);
       }
+#ifdef ShowFields
       fprintf(ofp, "   ");
       for (c = 0; c < 3; c++) {
         for (i = 0; i < d->mNVal[0]; i++) {
-          fprintf(ofp, "%6.3f ", a[((k*d->mNVal[1] + j)*d->mNVal[0] +
+          fprintf(ofp, "%8.1f ", a[((k*d->mNVal[1] + j)*d->mNVal[0] +
                                     i)*3 + c]);
         }
         fprintf(ofp, "   ");
       }
+#endif
       fprintf(ofp, "\n");
     }
   }
@@ -253,9 +257,13 @@ void AddGeometryTo(CD3Data* d, CD3List* l, uint8_t* type)
 {
   Point3D p;
   uint32_t ix, iy, iz;
+  int check = 0;
   for (iz = 0, p.m[2] = d->mMin[2]; iz < d->mNVal[2]; iz++, p.m[2] += d->mDelta[2]) {
     for (iy = 0, p.m[1] = d->mMin[1]; iy < d->mNVal[1]; iy++, p.m[1] += d->mDelta[1]) {
       for (ix = 0, p.m[0] = d->mMin[0]; ix < d->mNVal[0]; ix++, p.m[0] += d->mDelta[0]) {
+        if (fabs(p.m[0]) < 0.1) {
+          check++;
+        }
         if (CD3ListPointIn(l, &p)) {
           type[(iz * d->mNVal[1] + iy) * d->mNVal[0] + ix] = 0;
         }
