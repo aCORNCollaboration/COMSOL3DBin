@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		182AB7B21B714B180002038F /* COMSOLData.c in Sources */ = {isa = PBXBuildFile; fileRef = 182AB7AA1B714B180002038F /* COMSOLData.c */; };
-		182AB7B31B714B180002038F /* COMSOLData2D.c in Sources */ = {isa = PBXBuildFile; fileRef = 182AB7AC1B714B180002038F /* COMSOLData2D.c */; };
-		182AB7B41B714B180002038F /* COMSOLData3D.c in Sources */ = {isa = PBXBuildFile; fileRef = 182AB7AE1B714B180002038F /* COMSOLData3D.c */; };
-		182AB7B51B714B180002038F /* ReadField.c in Sources */ = {isa = PBXBuildFile; fileRef = 182AB7B01B714B180002038F /* ReadField.c */; };
-		182AB7B71B714CC50002038F /* COMSOLTxt2Bin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 182AB7B61B714CC50002038F /* COMSOLTxt2Bin.cpp */; };
+		18A23BFE1B715201008A2857 /* COMSOLData.c in Sources */ = {isa = PBXBuildFile; fileRef = 18A23BF61B715201008A2857 /* COMSOLData.c */; };
+		18A23BFF1B715201008A2857 /* COMSOLData2D.c in Sources */ = {isa = PBXBuildFile; fileRef = 18A23BF81B715201008A2857 /* COMSOLData2D.c */; };
+		18A23C001B715201008A2857 /* COMSOLData3D.c in Sources */ = {isa = PBXBuildFile; fileRef = 18A23BFA1B715201008A2857 /* COMSOLData3D.c */; };
+		18A23C011B715201008A2857 /* ReadField.c in Sources */ = {isa = PBXBuildFile; fileRef = 18A23BFC1B715201008A2857 /* ReadField.c */; };
+		18A23C031B715210008A2857 /* COMSOLTxt2Bin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18A23C021B715210008A2857 /* COMSOLTxt2Bin.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,15 +28,15 @@
 
 /* Begin PBXFileReference section */
 		182AB79F1B7144650002038F /* COMSOLTxt2Bin */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = COMSOLTxt2Bin; sourceTree = BUILT_PRODUCTS_DIR; };
-		182AB7AA1B714B180002038F /* COMSOLData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = COMSOLData.c; path = ../../CDSources/COMSOLData.c; sourceTree = "<group>"; };
-		182AB7AB1B714B180002038F /* COMSOLData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = COMSOLData.h; path = ../../CDSources/COMSOLData.h; sourceTree = "<group>"; };
-		182AB7AC1B714B180002038F /* COMSOLData2D.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = COMSOLData2D.c; path = ../../CDSources/COMSOLData2D.c; sourceTree = "<group>"; };
-		182AB7AD1B714B180002038F /* COMSOLData2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = COMSOLData2D.h; path = ../../CDSources/COMSOLData2D.h; sourceTree = "<group>"; };
-		182AB7AE1B714B180002038F /* COMSOLData3D.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = COMSOLData3D.c; path = ../../CDSources/COMSOLData3D.c; sourceTree = "<group>"; };
-		182AB7AF1B714B180002038F /* COMSOLData3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = COMSOLData3D.h; path = ../../CDSources/COMSOLData3D.h; sourceTree = "<group>"; };
-		182AB7B01B714B180002038F /* ReadField.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ReadField.c; path = ../../CDSources/ReadField.c; sourceTree = "<group>"; };
-		182AB7B11B714B180002038F /* ReadField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReadField.h; path = ../../CDSources/ReadField.h; sourceTree = "<group>"; };
-		182AB7B61B714CC50002038F /* COMSOLTxt2Bin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = COMSOLTxt2Bin.cpp; path = ../../COMSOL3DBin/COMSOLTxt2Bin.cpp; sourceTree = "<group>"; };
+		18A23BF61B715201008A2857 /* COMSOLData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = COMSOLData.c; sourceTree = "<group>"; };
+		18A23BF71B715201008A2857 /* COMSOLData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COMSOLData.h; sourceTree = "<group>"; };
+		18A23BF81B715201008A2857 /* COMSOLData2D.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = COMSOLData2D.c; sourceTree = "<group>"; };
+		18A23BF91B715201008A2857 /* COMSOLData2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COMSOLData2D.h; sourceTree = "<group>"; };
+		18A23BFA1B715201008A2857 /* COMSOLData3D.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = COMSOLData3D.c; sourceTree = "<group>"; };
+		18A23BFB1B715201008A2857 /* COMSOLData3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COMSOLData3D.h; sourceTree = "<group>"; };
+		18A23BFC1B715201008A2857 /* ReadField.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ReadField.c; sourceTree = "<group>"; };
+		18A23BFD1B715201008A2857 /* ReadField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadField.h; sourceTree = "<group>"; };
+		18A23C021B715210008A2857 /* COMSOLTxt2Bin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = COMSOLTxt2Bin.cpp; path = ../COMSOL3DBin/COMSOLTxt2Bin.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +53,8 @@
 		182AB7961B7144650002038F = {
 			isa = PBXGroup;
 			children = (
+				18A23C021B715210008A2857 /* COMSOLTxt2Bin.cpp */,
+				18A23BF51B715201008A2857 /* CDSources */,
 				182AB7A11B7144650002038F /* COMSOLTxt2Bin */,
 				182AB7A01B7144650002038F /* Products */,
 			);
@@ -69,25 +71,24 @@
 		182AB7A11B7144650002038F /* COMSOLTxt2Bin */ = {
 			isa = PBXGroup;
 			children = (
-				182AB7A91B714B000002038F /* CDSources */,
-				182AB7B61B714CC50002038F /* COMSOLTxt2Bin.cpp */,
 			);
 			path = COMSOLTxt2Bin;
 			sourceTree = "<group>";
 		};
-		182AB7A91B714B000002038F /* CDSources */ = {
+		18A23BF51B715201008A2857 /* CDSources */ = {
 			isa = PBXGroup;
 			children = (
-				182AB7AA1B714B180002038F /* COMSOLData.c */,
-				182AB7AB1B714B180002038F /* COMSOLData.h */,
-				182AB7AC1B714B180002038F /* COMSOLData2D.c */,
-				182AB7AD1B714B180002038F /* COMSOLData2D.h */,
-				182AB7AE1B714B180002038F /* COMSOLData3D.c */,
-				182AB7AF1B714B180002038F /* COMSOLData3D.h */,
-				182AB7B01B714B180002038F /* ReadField.c */,
-				182AB7B11B714B180002038F /* ReadField.h */,
+				18A23BF61B715201008A2857 /* COMSOLData.c */,
+				18A23BF71B715201008A2857 /* COMSOLData.h */,
+				18A23BF81B715201008A2857 /* COMSOLData2D.c */,
+				18A23BF91B715201008A2857 /* COMSOLData2D.h */,
+				18A23BFA1B715201008A2857 /* COMSOLData3D.c */,
+				18A23BFB1B715201008A2857 /* COMSOLData3D.h */,
+				18A23BFC1B715201008A2857 /* ReadField.c */,
+				18A23BFD1B715201008A2857 /* ReadField.h */,
 			);
 			name = CDSources;
+			path = ../CDSources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,11 +147,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				182AB7B21B714B180002038F /* COMSOLData.c in Sources */,
-				182AB7B41B714B180002038F /* COMSOLData3D.c in Sources */,
-				182AB7B51B714B180002038F /* ReadField.c in Sources */,
-				182AB7B31B714B180002038F /* COMSOLData2D.c in Sources */,
-				182AB7B71B714CC50002038F /* COMSOLTxt2Bin.cpp in Sources */,
+				18A23C011B715201008A2857 /* ReadField.c in Sources */,
+				18A23C031B715210008A2857 /* COMSOLTxt2Bin.cpp in Sources */,
+				18A23BFF1B715201008A2857 /* COMSOLData2D.c in Sources */,
+				18A23BFE1B715201008A2857 /* COMSOLData.c in Sources */,
+				18A23C001B715201008A2857 /* COMSOLData3D.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,14 +238,20 @@
 		182AB7A71B7144650002038F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.9;
 			};
 			name = Debug;
 		};
 		182AB7A81B7144650002038F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.9;
 			};
 			name = Release;
 		};
@@ -267,6 +274,7 @@
 				182AB7A81B7144650002038F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

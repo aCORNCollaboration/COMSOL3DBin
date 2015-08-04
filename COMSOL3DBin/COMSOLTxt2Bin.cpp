@@ -22,10 +22,8 @@
 #include "COMSOLData3D.h"
 #include "CD3List.h"
 
-int ProcessArguments(int argc, const char** argv);
-int QuadAverage(CD3Data* cd);
-void DoCheck(const char* name);
-int DoFile(const char* filename);
+CDError ProcessArguments(int argc, const char** argv);
+CDError DoFile(const char* filename);
 
 //static const int kMaxNFiles = 20;   Not sure which version of C this needs
 #define kMaxNFiles 20
@@ -66,7 +64,7 @@ int main(int argc, const char * argv[])
 //
 //  Handle a single file.
 //
-int DoFile(const char* filename)
+CDError DoFile(const char* filename)
 {
   char outName[256];
   char* ext;
@@ -84,7 +82,7 @@ int DoFile(const char* filename)
   if (theErr != kCDNoErr) {
     fprintf(stderr, "Error %d: Failed to read file %s.\n",
             theErr, filename);
-    return 2;
+    return kCDCantOpenIn;
   }
   //
   //  Construct output file name.
@@ -95,18 +93,18 @@ int DoFile(const char* filename)
   ofp = fopen(outName, "wb");
   if (ofp == NULL) {
     fprintf(stderr, "Failed to open %s for writing.", outName);
-    return 3;
+    return kCDCantOpenOut;
   }
   //
   //  Write field to file.
   //
   if (!CD3WriteBinary(&cData, ofp)) {
     fprintf(stderr, "Binary write failed.\n");
-    return 4;
+    return kCDBadWrite;
   }
   CD3Finish(&cData);
   fclose(ofp);
-  return 0;
+  return kCDNoErr;
 }
 
 //
@@ -114,12 +112,12 @@ int DoFile(const char* filename)
 //  Interprets anything beginning with '-' as an option and
 //  tries to use it. Anything else is collected in the file list.
 //
-int ProcessArguments(int argc, const char** argv)
+CDError ProcessArguments(int argc, const char** argv)
 {
-  int iVal, argn;
+  int argn;
   if (argc < 2) {
     fprintf(stderr, "No arguments given.\n");
-    return 1;
+    return kCDNoArgs;
   }
   for (argn = 1; argn < argc; argn++) {
     if (argv[argn][0] == '-') {
@@ -141,5 +139,5 @@ int ProcessArguments(int argc, const char** argv)
       }
     }
   }
-  return 0;
+  return kCDNoErr;
 }

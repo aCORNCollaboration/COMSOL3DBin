@@ -175,13 +175,17 @@ void CDFinish(CDData* dp)
   if (NULL != dp->mExprNames) {
     free(dp->mExprNames);
   }
-  if (dp->mNLine > 0) {
-    for (line = 0; line < dp->mNDimension + dp->mNExpression; line++) {
-      if (NULL != dp->mDStore[line]) {
-        free(dp->mDStore[line]);
+  if (NULL != dp->mDStore) {
+    if (dp->mNLine > 0) {
+      for (line = 0; line < dp->mNDimension + dp->mNExpression; line++) {
+        if (NULL != dp->mDStore[line]) {
+          free(dp->mDStore[line]);
+        }
       }
     }
     free(dp->mDStore);
+  }
+  if (NULL != dp->mRange) {
     free(dp->mRange);
   }
 }

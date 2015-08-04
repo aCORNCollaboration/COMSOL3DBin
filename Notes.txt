@@ -171,3 +171,9 @@ to add it to a workspace. I added it to the new one and
 things now look the way I might expect.
 New project gets a new main called COMSOLTxt2Bin.cpp.
 
+Copied onto MacPro where I found that I was not building
+the right project. Redid the new project and found that
+switching to C++ had made it more picky about return types.
+Fixed a bunch of CDError returns. Seems to run fine.
+Commit.
+

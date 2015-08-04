@@ -60,6 +60,8 @@ typedef enum CDErrorTag {
   kCDNotLeaf,
   kCDNot4Fold,
   kCDBadGeom,
+  kCDNoArgs,
+  kCDBadWrite,
   kCDError
 } CDError;
 
