@@ -51,13 +51,22 @@ void GeomPrintOn(Geom* g, FILE* ofp)
   assert(NULL != g);
   switch(g->mId) {
     case kSD3ICyl:
-      fprintf(ofp, "ICylinder from (%lfm %lf, %lf) to (%lf, %lf, %lf)\n",
+      fprintf(ofp, "ICylinder from (%f, %f, %f) to (%f, %f, %f)\n",
               g->mMin.m[0], g->mMin.m[1], g->mMin.m[2],
               g->mMax.m[0], g->mMax.m[1], g->mMax.m[1]);
-      fprintf(ofp, "Axis direction %d, radius %lf.\n",
-              g->mAxis, sqrt(g->mR1Squared));
+      fprintf(ofp, "Axis indices (%d, %d, %d) radius %f.\n",
+              g->mIdx0, g->mIdx1, g->mIdx2, sqrt(g->mR1Squared));
       break;
 
+    case kSD3Torus:
+      fprintf(ofp, "Torus from (%f, %f, %f) to (%f, %f, %f)\n",
+              g->mMin.m[0], g->mMin.m[1], g->mMin.m[2],
+              g->mMax.m[0], g->mMax.m[1], g->mMax.m[1]);
+      fprintf(ofp, "Axis indices (%d, %d, %d) radius1 %f radius2 %f.\n",
+              g->mIdx0, g->mIdx1, g->mIdx2,
+              sqrt(g->mR1Squared), sqrt(g->mR2Squared));
+      break;
+      
     default:
       fprintf(ofp, "Raw Geometry ID = %d\n", g->mId);
       break;
@@ -94,78 +103,143 @@ void ICylinderInit(Geom* g, int axis, double* args)
     g->mMin.m[i] = args[i];
     g->mMax.m[i] = args[i+3];
   }
-  g->mAxis = axis;
+  switch (axis) {
+    case 0:
+      //
+      //  Axis is x, lowest is y, mid is z
+      //
+      g->mIdx0 = 1;
+      g->mIdx1 = 2;
+      g->mIdx2 = 0;
+      break;
+      
+    case 1:
+      //
+      //  Axis is y, lowest is z, mid is x
+      //
+      g->mIdx0 = 2;
+      g->mIdx1 = 0;
+      g->mIdx2 = 1;
+      break;
+      
+    case 2:
+      //
+      //  Axis is z, lowest is x, mid is y
+      //
+      g->mIdx0 = 0;
+      g->mIdx1 = 1;
+      g->mIdx2 = 2;
+      break;
+      
+    default:
+      fprintf(stderr, "INVALID AXIS %d\n", axis);
+      g->mIdx0 = 0;
+      g->mIdx1 = 1;
+      g->mIdx2 = 2;
+  };
   g->mR1Squared = args[6] * args[6];
 }
 //
 //  ICylinderPointIn returns true of the point falls inside
 //  the cylinder itself.
 //
-int ICylinderPointIn(Geom* g, Point3D* p)
+int ICylinderPointIn(Geom* g, Point3D* p, double tol)
 {
-  double dx, dy, dz, rsq;
-  double  tolsq = 0.01 * 0.01;
-  switch (g->mAxis) {
+  double dx0, dx1, rsq;
+  double  tolsq = tol * tol;
+  //
+  //  Start by testing axial position.
+  //
+  if ((p->m[g->mIdx2] < g->mMin.m[g->mIdx2]) ||
+      (p->m[g->mIdx2] > g->mMax.m[g->mIdx2])) {
+    return false;
+  }
+  //
+  //  We're OK in the x direction. Try the radius.
+  //
+  dx0 = p->m[g->mIdx0] - g->mMin.m[g->mIdx0];
+  dx1 = p->m[g->mIdx1] - g->mMin.m[g->mIdx1];
+  rsq = dx0*dx0 + dx1*dx1;
+  if  (rsq < g->mR1Squared + tolsq) {
+    return true;
+  }
+  return false;
+}
+
+//
+//  Constructor for a Torus.
+//  Copy the parameters into their proper places and compute
+//  the bounding box.
+//  Params xMin, yMin, zMin, xMax, yMax, zMax, radius1, radius2
+//
+void TorusInit(Geom* g, int axis, double* args)
+{
+  int i;
+  GeomInit(g, kSD3Torus);
+  for (i = 0; i < 3; i++) {
+    g->mMin.m[i] = args[i];
+    g->mMax.m[i] = args[i+3];
+  }
+  switch (axis) {
     case 0:
       //
-      //  Tube parallel to x axis.
-      //  Start by testing x position.
+      //  Axis is x, lowest is y, mid is z
       //
-      if ((p->m[0] < g->mMin.m[0]) || (p->m[0] > g->mMax.m[0])) {
-        return false;
-      }
-      //
-      //  We're OK in the x direction. Try the radius.
-      //
-      dy = p->m[1] - g->mMin.m[1];
-      dz = p->m[2] - g->mMin.m[2];
-      rsq = dy*dy + dz*dz;
-      if  (rsq < g->mR1Squared + tolsq) {
-        return true;
-      }
+      g->mIdx0 = 1;
+      g->mIdx1 = 2;
+      g->mIdx2 = 0;
       break;
-
+      
     case 1:
       //
-      //  y axis.
-      //  Start by testing y position.
+      //  Axis is y, lowest is z, mid is x
       //
-      if ((p->m[1] < g->mMin.m[1]) || (p->m[1] > g->mMax.m[1])) {
-        return false;
-      }
-      //
-      //  We're OK in the y direction. Try the radius.
-      //
-      dx = p->m[0] - g->mMin.m[0];
-      dz = p->m[2] - g->mMin.m[2];
-      rsq = dx*dx + dz*dz;
-      if  (rsq < g->mR1Squared + tolsq) {
-        return true;
-      }
+      g->mIdx0 = 2;
+      g->mIdx1 = 0;
+      g->mIdx2 = 1;
       break;
-
+      
     case 2:
       //
-      //  Tube parallel to z axis.
-      //  Start by testing z position.
+      //  Axis is z, lowest is x, mid is y
       //
-      if ((p->m[2] <= g->mMin.m[2]) || (p->m[2] >= g->mMax.m[2])) {
-        return false;
-      }
-      //
-      //  We're OK in the z direction. Try the radius.
-      //
-      dx = p->m[0] - g->mMin.m[0];
-      dy = p->m[1] - g->mMin.m[1];
-      rsq = dx*dx + dy*dy;
-      if  (rsq < g->mR1Squared + tolsq) {
-        return true;
-      }
+      g->mIdx0 = 0;
+      g->mIdx1 = 1;
+      g->mIdx2 = 2;
       break;
-
+      
     default:
-      fprintf(stderr, "INVALID AXIS %d\n", g->mAxis);
-      return false;
+      fprintf(stderr, "INVALID AXIS %d\n", axis);
+      g->mIdx0 = 0;
+      g->mIdx1 = 1;
+      g->mIdx2 = 2;
+  };
+  g->mR1Squared = args[6] * args[6];
+  g->mR2Squared = args[7] * args[7];
+}
+//
+//  TorusPointIn returns true of the point falls inside
+//  the outer radius and outside the inner as well as in
+//  range axially.
+//
+int TorusPointIn(Geom* g, Point3D* p, double tol)
+{
+  double dx0, dx1, rsq;
+  double  tolsq = tol * tol;
+  //  Start by testing axial position.
+  //
+  if ((p->m[g->mIdx2] < g->mMin.m[g->mIdx2]) ||
+      (p->m[g->mIdx2] > g->mMax.m[g->mIdx2])) {
+    return false;
+  }
+  //
+  //  We're OK in the x direction. Try the radius.
+  //
+  dx0 = p->m[g->mIdx0] - g->mMin.m[g->mIdx0];
+  dx1 = p->m[g->mIdx1] - g->mMin.m[g->mIdx1];
+  rsq = dx0*dx0 + dx1*dx1;
+  if  ((rsq < g->mR2Squared + tolsq) && (rsq > g->mR1Squared - tolsq)) {
+    return true;
   }
   return false;
 }

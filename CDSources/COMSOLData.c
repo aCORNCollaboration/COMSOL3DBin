@@ -223,7 +223,7 @@ double CDGetValueAtPoint(CDData* dp, unsigned int dim, double coord[3])
       return nan("");
     }
     if (dp->mRange[i].mNVal > 1) {
-      index[i] = (coord[i] - dp->mRange[i].mMin) / dp->mRange[i].mDelta;
+      index[i] = (int) ((coord[i] - dp->mRange[i].mMin) / dp->mRange[i].mDelta);
     } else {
       index[i] = 0;
     }
@@ -326,8 +326,8 @@ CDError CDParseHeader(FILE* ifp, CDData* dp)
   char headline[255];
   char option[32];
   static char modelName[256];
-  char ch, *strp;
-  int expr;
+  char *strp;
+  int ch, expr;
   //
   //  File is open. Read the header. Should be a 9 line
   //  header of comments beginning %.
@@ -393,7 +393,10 @@ CDError CDParseHeader(FILE* ifp, CDData* dp)
       char* nameBuff = (char *) malloc(nName * 16 * sizeof(char));
       if (NULL == nameBuff) return kCDNameAllocFailed;
       dp->mExprNames = (char **) malloc(nName * sizeof(char *));
-      if (NULL == dp->mExprNames) return kCDNameAllocFailed;
+      if (NULL == dp->mExprNames) {
+        free(nameBuff);
+        return kCDNameAllocFailed;
+      }
       for (expr = 0; expr < nName; expr++) {
         dp->mExprNames[expr] = &(nameBuff[16 * expr]);
       }
@@ -402,7 +405,7 @@ CDError CDParseHeader(FILE* ifp, CDData* dp)
         fscanf(ifp, "%s", dp->mExprNames[expr]);
       }
       for (; expr < nName; expr++) {
-        unsigned int nfirst;
+//        unsigned int nfirst;
         //
         //  These are more difficult because there are two strings
         //  for each (expression and unit) and the name is only
@@ -461,7 +464,7 @@ void CDAnalyse(CDData* dp)
   }
   //
   //  Now the slow actives are set with the fastest changing one set to 1.
-  //  Work backwards over the dimensions figuring our how many different
+  //  Work backwards over the dimensions figuring out how many different
   //  values each takes.
   //
   nPoint = dp->mNLine;

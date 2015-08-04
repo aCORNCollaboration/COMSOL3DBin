@@ -222,8 +222,11 @@ uint8_t* NewTypeArray(uint32_t nVal[3]) {
 
 void SmoothPrintOn(CD3Data* d, uint8_t* type, FILE* ofp)
 {
-  int i,j,k, c;
+  int i,j,k;
+#ifdef ShowFields
+  int c;
   double* a = d->mField;
+#endif
   for (k = 0; k < d->mNVal[2]; k++) {
     fprintf(ofp, "k=%d\n", k);
     for (j = 0; j < d->mNVal[1]; j++) {
@@ -264,7 +267,7 @@ void AddGeometryTo(CD3Data* d, CD3List* l, uint8_t* type)
         if (fabs(p.m[0]) < 0.1) {
           check++;
         }
-        if (CD3ListPointIn(l, &p)) {
+        if (CD3ListPointIn(l, &p, d->mDelta[0])) {
           type[(iz * d->mNVal[1] + iy) * d->mNVal[0] + ix] = 0;
         }
       }

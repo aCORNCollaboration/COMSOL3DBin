@@ -186,16 +186,22 @@ CDError CD3InitFEMM(CD3Data* dp, const char* fname)
   yVals = (double *) malloc(nLine * sizeof(double));
   if (yVals == NULL) {
     fprintf(stderr, "Failed to alocate %d slots for y values.\n", nLine);
+    free(xVals);
     return kCDAllocFailed;
   }
   exVals = (double *) malloc(nLine * sizeof(double));
   if (exVals == NULL) {
     fprintf(stderr, "Failed to alocate %d slots for Ex values.\n", nLine);
+    free(xVals);
+    free(yVals);
     return kCDAllocFailed;
   }
   eyVals = (double *) malloc(nLine * sizeof(double));
   if (eyVals == NULL) {
     fprintf(stderr, "Failed to alocate %d slots for Ey values.\n", nLine);
+    free(xVals);
+    free(yVals);
+    free(exVals);
     return kCDAllocFailed;
   }
   //
@@ -799,7 +805,7 @@ bool Get3DEAtPoint(const CD3Data* dp, const double coord[3], double* EField)
 //  double x = coord[0], y = coord[1], z = coord[2];
   //  printf("[%f,%f,%f]\n",x,y,z);
   for (i = 0; i < 3; i++) {
-    index[i] = (coord[i] - dp->mMin[i]) / dp->mDelta[i];
+    index[i] = (int) ((coord[i] - dp->mMin[i]) / dp->mDelta[i]);
     if (index[i] == dp->mNVal[i]-1) { // Correct if at top edge
       --index[i];
     }
@@ -958,8 +964,8 @@ bool Get2DEAtPoint(const CD3Data* dp, const double coord[2], double* EField)
   //  Compute indices and range check. Limits for r are 0 and xMax or yMax,
   //  those for z are z so I use y and z.
   //
-  index[0] = coord[0] / dp->mDelta[1];
-  index[1] = (coord[1] - dp->mMin[2]) / dp->mDelta[2];
+  index[0] = (int) (coord[0] / dp->mDelta[1]);
+  index[1] = (int) ((coord[1] - dp->mMin[2]) / dp->mDelta[2]);
   for (i = 0; i < 2; i++) {
     if (index[i] == dp->mNVal[i+1]-1) { // Correct if at top edge
       --index[i];
@@ -968,7 +974,7 @@ bool Get2DEAtPoint(const CD3Data* dp, const double coord[2], double* EField)
     if (index[i] >= dp->mNVal[i+1]) {
       fprintf(stderr, "Get2DEAtPoint: Index #%d = %d out of range\n",
               i, index[i]);
-      return nan("");
+      return false;
     }
 #endif
   }

@@ -40,9 +40,13 @@
 //
 static int GetArgList(CD3List* l);
 //
-//  BuildICylinder wants six arguments to construct an interior cylinder
+//  BuildICylinder wants seven arguments to construct an interior cylinder
 //
 static bool BuildICylinder(CD3List* l);
+//
+//  BuildTorus wants eight since it has two radii.
+//
+static bool BuildTorus(CD3List* l);
 
 //
 //  CD3List
@@ -101,13 +105,21 @@ bool CD3ListReadGeom(CD3List* l, const char* inFilename)
       cmd = strtok(l->mLineBuff, " ,\t\r\n");
       GetArgList(l);
       if (strncmp(cmd, "icyl", 4) == 0) {
-        if (l->mNArg != 8) {
-          fprintf(stderr, "Expecting 8 arguments for an icyl, found %d.",
+        if (l->mNArg < 7) {
+          fprintf(stderr, "Expecting 7 arguments for an icyl, found %d.",
                   l->mNArg);
           fclose(ifp);
           return false;
         }
         BuildICylinder(l);
+      } else if (strncmp(cmd, "torus", 5) == 0) {
+        if (l->mNArg < 8) {
+          fprintf(stderr, "Expecting 8 arguments for a torus, found %d.",
+                  l->mNArg);
+          fclose(ifp);
+          return false;
+        }
+        BuildTorus(l);
       } else {
         fprintf(stderr, "Ignored nknown command %s.\n", cmd);
       }
@@ -144,7 +156,7 @@ int GetArgList(CD3List* l) {
 }
 
 //
-//  BuildICylinder wants eight arguments to construct an interior cylinder
+//  BuildICylinder wants seven arguments to construct an interior cylinder
 //  icyl <xmin> <xmax> <ymin> <ymax> <zmin> <zmax> <radius>
 //
 bool BuildICylinder(CD3List* l)
@@ -193,6 +205,57 @@ bool BuildICylinder(CD3List* l)
 }
 
 //
+//  BuildTorus wants eight arguments to construct an interior cylinder
+//  icyl <xmin> <xmax> <ymin> <ymax> <zmin> <zmax> <iradius> <oradius>
+//  It differs from an icyl only in having an extra radius argument
+//  so the code is practically identical.
+//
+bool BuildTorus(CD3List* l)
+{
+  int i, act = -1, nActive = 0;
+  double diff[3];
+  bool active[3];
+  static char sNames[4] = "xyz";
+  Geom* newTorus = NULL;
+  /*
+   *  Verify the arguments.
+   *  Make sure that min and max are ordered or same.
+   */
+  for (i = 0; i < 3; i++) {
+    diff[i] = l->mArg[i+3] - l->mArg[i];
+    if (diff[i] < 0.0) {
+      fprintf(stderr, "Error building ICylinder %cMin=%lf > %cMax=%lf\n",
+              sNames[i],l->mArg[i],sNames[i],l->mArg[i+3]);
+      return false;
+    } else if (diff[i] == 0) {
+      active[i] = false;
+    } else {
+      active[i] = true;
+      ++nActive;
+      act = i;
+    }
+  }
+  /*
+   *  Make sure only ONE pair is different
+   */
+  if (nActive != 1) {
+    fprintf(stderr, "Error building ICylinder max and min are all same.\n");
+    return false;
+  }
+  //
+  //  If get here then points are different but only in 1 dimension and
+  //  we stored the direction in act. Build the Torus and add it
+  //  to the list.
+  //
+  newTorus = (Geom*) malloc(sizeof(Geom));
+  assert(NULL != newTorus);
+  TorusInit(newTorus, act, l->mArg);
+  newTorus->mNext = l->mGList;
+  l->mGList = newTorus;
+  return true;
+}
+
+//
 //  Make printable
 //
 void CD3ListPrintOn(CD3List* l, FILE* ofp)
@@ -208,20 +271,24 @@ void CD3ListPrintOn(CD3List* l, FILE* ofp)
 //  Tell caller whether a point is inside the geometry (and
 //  thus inactive) or not.
 //
-int CD3ListPointIn(CD3List* l, Point3D* p)
+int CD3ListPointIn(CD3List* l, Point3D* p, double tol)
 {
   Geom* g = NULL;
   int test;
   for (g = l->mGList; NULL != g; g = g->mNext) {
-    if ((fabs(p->m[0] - g->mMin.m[0]) <= 0.1) && (fabs(p->m[1] - g->mMin.m[1]) <= 0.1)) {
-      test = true;
-    }
+//    if ((fabs(p->m[0] - g->mMin.m[0]) <= 0.1) && (fabs(p->m[1] - g->mMin.m[1]) <= 0.1)) {
+//      test = true;
+//    }
     test = false;
     switch (g->mId) {
       case kSD3ICyl:
-        test = ICylinderPointIn(g, p);
+        test = ICylinderPointIn(g, p, tol);
         break;
 
+      case kSD3Torus:
+        test = TorusPointIn(g, p, tol);
+        break;
+        
       default:
         fprintf(stderr, "Unsupported geometry type %d.\n", g->mId);
         break;

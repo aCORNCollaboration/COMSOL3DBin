@@ -119,3 +119,42 @@ inside to make sure that they are put in symmetrically. With that
 the system works beautifully, at least for interior cylinders.
 
 I now need to implement torii. But commit this first.
+In implementing torii I have slimmed down the cylinder test (and
+had an idea for slimming it further) and added a tolerance param
+to the PointIn tests so that you pass if you are within half a
+spacing of the right answer.
+I originally had three separate cylinder tests, one for each
+direction. I have now reduced that to 1 by introducing index
+variables that are assigned to actual 0,1,2 values depending on
+the orientation of the cylinder. Index 2 is the cylinder axis
+and the other two are chosen to make a right handed set.
+I now realise that this can be initialised when we build the
+Geom and simply used in the test. The three indices will
+replace the single mAxis variable.
+
+I changed the language setting to C89 and cleaned some things
+up so that it now builds without warnings (though I think that
+I don't have the warning level set very high). Turned up warnings
+and made them all go away!
+
+Then I ran the static analyzer and threw up 23 issues! Most of
+them were drivel, though I did catch a few not very interesting
+memory leaks.
+
+8/4/15
+As I pull data from NG6Mirror13 (the ultimate model!) I find
+that it would be VERY useful to be able to merge two or
+more binary fields into a single file. Obviously this would
+only work if the regions are the same basic shape and adjoin
+or overlap in some direction.
+
+This makes me think that I might want to slightly restructure
+COMSOL3DBin. At the moment there are two basic parts, the
+low-level pure C code to read and write text and binary
+files and the driver program that uses that low-level code.
+The driver is getting complicated as it handles more different
+kinds of files and does averaging as well as file conversion.
+It would be possible to add file merging but I think it would
+be better to start splitting off different tools. Before I
+do anything else I need to commit the source to date and then
+learn how to fork the code.

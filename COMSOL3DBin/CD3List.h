@@ -69,7 +69,7 @@ void CD3ListPrintOn(CD3List* l, FILE* ofp);
 //  Tell caller whether a point is inside the geometry (and
 //  thus inactive) or not.
 //
-int CD3ListPointIn(CD3List* l, Point3D* p);
+int CD3ListPointIn(CD3List* l, Point3D* p, double tol);
 //
 //  Write into a Smoothable.
 //

@@ -18,6 +18,11 @@
 //  To make this more efficient each Geometry adds the idea of a BoundingBox
 //  that can be queried by the outside world. Restructured the Geom
 //  parameters into named groups at the same time.
+//  BCollett 8/1/15 Change the way axis info is stored in Cyls and Torii.
+//  Instead of 1 mAxis variable have three mIdx0, mIdx1, mIdx2 that are
+//  the indices into the coordinate arrays organized so that idx2 points
+//  along the axis of the cylinder and idx0 and 1 form a right-handed
+//  coordinate system.
 //
 //  Created by Brian Collett on 7/27/15.
 //  Copyright (c) 2015 Brian Collett. All rights reserved.
@@ -58,7 +63,7 @@ typedef struct Box3DTag {
 typedef enum {
   kSD3Empty = 0,
   kSD3ICyl,     // Volume inside a cylinder aligned with axes.
-  kSD3ITorus,   // Volume inside a square-sectioned torus
+  kSD3Torus,   // Volume inside a square-sectioned torus
   kSD3End,      // end of geometry. Allows sharing geom file with other.
   kSD3Error
 } SD3Command;
@@ -72,9 +77,9 @@ typedef struct GeomTag {
   Box3D mBounds;
   Point3D mMin;
   Point3D mMax;
-  int mAxis;            // Our axis, if have one, is parallel to this
-  double mR1Squared;    // Store radii as squares
-  double mR2Squared;    // Torii have two.
+  int mIdx0, mIdx1, mIdx2;  // Idx2 is axis of symmetry if present
+  double mR1Squared;        // Store radii as squares
+  double mR2Squared;        // Torii have two.
 } Geom;
 //
 int GeomInit(Geom* g, int id);
@@ -94,7 +99,16 @@ void ICylinderInit(Geom* g, int axis, double* args);
 //  ICylinderPointIn returns true of the point falls inside
 //  the cylinder itself.
 //
-int ICylinderPointIn(Geom* g, Point3D* p);
+int ICylinderPointIn(Geom* g, Point3D* p, double tol);
+//
+//  Constructor for an Torus.
+//
+void TorusInit(Geom* g, int axis, double* args);
+//
+//  ICylinderPointIn returns true of the point falls inside
+//  the cylinder itself.
+//
+int TorusPointIn(Geom* g, Point3D* p, double tol);
 //
 //  Old form functionality removed 7/30/15
 //  Add to a type array.

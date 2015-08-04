@@ -177,18 +177,6 @@ void CD2Finish(CD2Data* dp)
     if (NULL != dp->mFieldVals[dim]) {
       free(dp->mFieldVals[dim]);
     }
-    if (NULL != dp->mNVal) {
-      free(dp->mNVal);
-    }
-    if (NULL != dp->mMax) {
-      free(dp->mMax);
-    }
-    if (NULL != dp->mMin) {
-      free(dp->mMin);
-    }
-    if (NULL != dp->mDelta) {
-      free(dp->mDelta);
-    }
   }
 }
 //
@@ -220,7 +208,7 @@ double CD2GetValueAtPoint(CD2Data* dp, unsigned int dim, double coord[2])
     return nan("");
   }
   for (i = 0; i < 2; i++) {
-    index[i] = (coord[i] - dp->mMin[i]) / dp->mDelta[i];
+    index[i] = (int) ((coord[i] - dp->mMin[i]) / dp->mDelta[i]);
 #ifdef CD2BoundsCheck
     if ((coord[i] < dp->mMin[i]) || (coord[i] > dp->mMax[i])) {
       fprintf(stderr, "CD2GetValueAtPoint:Coordinate %d out of range\n", i);
@@ -270,7 +258,7 @@ double CD2GetValueAtPoint(CD2Data* dp, unsigned int dim, double coord[2])
   return c;
 }
 
-double CD2GetExAtPoint(CD2Data* dp, double coord[2])
+double CD2GetErAtPoint(CD2Data* dp, double coord[2])
 {
   return CD2GetValueAtPoint(dp, 0, coord);
 }
@@ -288,15 +276,15 @@ bool CD2GetEAtPoint(CD2Data* dp, double coord[3], double* EField)
   int idx00, idx01, idx10, idx11;
   double c0, c1; // Interpolation steps
   for (i = 0; i < 2; i++) {
-    index[i] = (coord[i] - dp->mMin[i]) / dp->mDelta[i];
+    index[i] = (int) ((coord[i] - dp->mMin[i]) / dp->mDelta[i]);
 #ifdef CD2BoundsCheck
     if ((coord[i] < dp->mMin[i]) || (coord[i] > dp->mMax[i])) {
       fprintf(stderr, "CD2GetValueAtPoint:Coordinate %d out of range\n", i);
-      return nan("");
+      return false;
     }
     if (index[i] >= dp->mNVal[i]) {
       fprintf(stderr, "CD2GetValueAtPoint:Index %d out of range\n", i);
-      return nan("");
+      return false;
     }
 #endif
   }
