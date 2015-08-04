@@ -1,0 +1,274 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		182AB7B21B714B180002038F /* COMSOLData.c in Sources */ = {isa = PBXBuildFile; fileRef = 182AB7AA1B714B180002038F /* COMSOLData.c */; };
+		182AB7B31B714B180002038F /* COMSOLData2D.c in Sources */ = {isa = PBXBuildFile; fileRef = 182AB7AC1B714B180002038F /* COMSOLData2D.c */; };
+		182AB7B41B714B180002038F /* COMSOLData3D.c in Sources */ = {isa = PBXBuildFile; fileRef = 182AB7AE1B714B180002038F /* COMSOLData3D.c */; };
+		182AB7B51B714B180002038F /* ReadField.c in Sources */ = {isa = PBXBuildFile; fileRef = 182AB7B01B714B180002038F /* ReadField.c */; };
+		182AB7B71B714CC50002038F /* COMSOLTxt2Bin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 182AB7B61B714CC50002038F /* COMSOLTxt2Bin.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		182AB79D1B7144650002038F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		182AB79F1B7144650002038F /* COMSOLTxt2Bin */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = COMSOLTxt2Bin; sourceTree = BUILT_PRODUCTS_DIR; };
+		182AB7AA1B714B180002038F /* COMSOLData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = COMSOLData.c; path = ../../CDSources/COMSOLData.c; sourceTree = "<group>"; };
+		182AB7AB1B714B180002038F /* COMSOLData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = COMSOLData.h; path = ../../CDSources/COMSOLData.h; sourceTree = "<group>"; };
+		182AB7AC1B714B180002038F /* COMSOLData2D.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = COMSOLData2D.c; path = ../../CDSources/COMSOLData2D.c; sourceTree = "<group>"; };
+		182AB7AD1B714B180002038F /* COMSOLData2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = COMSOLData2D.h; path = ../../CDSources/COMSOLData2D.h; sourceTree = "<group>"; };
+		182AB7AE1B714B180002038F /* COMSOLData3D.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = COMSOLData3D.c; path = ../../CDSources/COMSOLData3D.c; sourceTree = "<group>"; };
+		182AB7AF1B714B180002038F /* COMSOLData3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = COMSOLData3D.h; path = ../../CDSources/COMSOLData3D.h; sourceTree = "<group>"; };
+		182AB7B01B714B180002038F /* ReadField.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ReadField.c; path = ../../CDSources/ReadField.c; sourceTree = "<group>"; };
+		182AB7B11B714B180002038F /* ReadField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReadField.h; path = ../../CDSources/ReadField.h; sourceTree = "<group>"; };
+		182AB7B61B714CC50002038F /* COMSOLTxt2Bin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = COMSOLTxt2Bin.cpp; path = ../../COMSOL3DBin/COMSOLTxt2Bin.cpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		182AB79C1B7144650002038F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		182AB7961B7144650002038F = {
+			isa = PBXGroup;
+			children = (
+				182AB7A11B7144650002038F /* COMSOLTxt2Bin */,
+				182AB7A01B7144650002038F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		182AB7A01B7144650002038F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				182AB79F1B7144650002038F /* COMSOLTxt2Bin */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		182AB7A11B7144650002038F /* COMSOLTxt2Bin */ = {
+			isa = PBXGroup;
+			children = (
+				182AB7A91B714B000002038F /* CDSources */,
+				182AB7B61B714CC50002038F /* COMSOLTxt2Bin.cpp */,
+			);
+			path = COMSOLTxt2Bin;
+			sourceTree = "<group>";
+		};
+		182AB7A91B714B000002038F /* CDSources */ = {
+			isa = PBXGroup;
+			children = (
+				182AB7AA1B714B180002038F /* COMSOLData.c */,
+				182AB7AB1B714B180002038F /* COMSOLData.h */,
+				182AB7AC1B714B180002038F /* COMSOLData2D.c */,
+				182AB7AD1B714B180002038F /* COMSOLData2D.h */,
+				182AB7AE1B714B180002038F /* COMSOLData3D.c */,
+				182AB7AF1B714B180002038F /* COMSOLData3D.h */,
+				182AB7B01B714B180002038F /* ReadField.c */,
+				182AB7B11B714B180002038F /* ReadField.h */,
+			);
+			name = CDSources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		182AB79E1B7144650002038F /* COMSOLTxt2Bin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 182AB7A61B7144650002038F /* Build configuration list for PBXNativeTarget "COMSOLTxt2Bin" */;
+			buildPhases = (
+				182AB79B1B7144650002038F /* Sources */,
+				182AB79C1B7144650002038F /* Frameworks */,
+				182AB79D1B7144650002038F /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = COMSOLTxt2Bin;
+			productName = COMSOLTxt2Bin;
+			productReference = 182AB79F1B7144650002038F /* COMSOLTxt2Bin */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		182AB7971B7144650002038F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0640;
+				ORGANIZATIONNAME = "Brian Collett";
+				TargetAttributes = {
+					182AB79E1B7144650002038F = {
+						CreatedOnToolsVersion = 6.4;
+					};
+				};
+			};
+			buildConfigurationList = 182AB79A1B7144650002038F /* Build configuration list for PBXProject "COMSOLTxt2Bin" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 182AB7961B7144650002038F;
+			productRefGroup = 182AB7A01B7144650002038F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				182AB79E1B7144650002038F /* COMSOLTxt2Bin */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		182AB79B1B7144650002038F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				182AB7B21B714B180002038F /* COMSOLData.c in Sources */,
+				182AB7B41B714B180002038F /* COMSOLData3D.c in Sources */,
+				182AB7B51B714B180002038F /* ReadField.c in Sources */,
+				182AB7B31B714B180002038F /* COMSOLData2D.c in Sources */,
+				182AB7B71B714CC50002038F /* COMSOLTxt2Bin.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		182AB7A41B7144650002038F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		182AB7A51B7144650002038F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		182AB7A71B7144650002038F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		182AB7A81B7144650002038F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		182AB79A1B7144650002038F /* Build configuration list for PBXProject "COMSOLTxt2Bin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				182AB7A41B7144650002038F /* Debug */,
+				182AB7A51B7144650002038F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		182AB7A61B7144650002038F /* Build configuration list for PBXNativeTarget "COMSOLTxt2Bin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				182AB7A71B7144650002038F /* Debug */,
+				182AB7A81B7144650002038F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 182AB7971B7144650002038F /* Project object */;
+}

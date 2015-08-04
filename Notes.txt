@@ -158,3 +158,16 @@ It would be possible to add file merging but I think it would
 be better to start splitting off different tools. Before I
 do anything else I need to commit the source to date and then
 learn how to fork the code.
+
+I have used XCode to create a branch called SepTools.
+Start by creating a pruned version of the main tool that ONLY
+converts .txt files to .bin files. Call it COMSOLTxt2Bin.
+Start by converting the project to a Workspace, which you
+do by doing a File|Save As Workspace. I call the new space
+COMSOLSepTools. I am not at all convinced that I understand
+the workspace. Continue anyway.
+AHA, when I went to create a new project I found an option
+to add it to a workspace. I added it to the new one and
+things now look the way I might expect.
+New project gets a new main called COMSOLTxt2Bin.cpp.
+
