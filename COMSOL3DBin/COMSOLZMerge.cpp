@@ -135,7 +135,12 @@ CDError MergeData(const CD3Data* ind1, const CD3Data* ind2, CD3Data* outd)
   const CD3Data* hiz = (lowz == ind1) ? ind2 : ind1;
   unsigned int nz = lowz->mNVal[2];
   unsigned int kmin = (lowz->mMax[2] - hiz->mMin[2]) / lowz->mDelta[2];
-  nz += hiz->mNVal[2] - kmin;
+  int nNew = (hiz->mMax[2] - lowz->mMax[2]) / hiz->mDelta[2];
+  if (nNew <= 0) {
+    fprintf(stderr, "No value to copy from high Z file.\n");
+    return kCDError;
+  }
+  nz += nNew;
   //
   //  Start filling in out. We know the ranges, deltas, and numbers
   //  of values.Copy from lowz and then adjust the z vals.
@@ -166,7 +171,7 @@ CDError MergeData(const CD3Data* ind1, const CD3Data* ind2, CD3Data* outd)
   lowsize *= lowz->mNVal[1];
   lowsize *= lowz->mNVal[2];     // Avoids overflow
   lowsize *= 3;    // 3 doubles at each point!
-  memcpy(outd->mField, lowz->mField, lowsize);
+  memcpy(outd->mField, lowz->mField, lowsize * sizeof(double));
   uint64_t hisize = hiz->mNVal[0];
   hisize *= hiz->mNVal[1];
   hisize *= (hiz->mNVal[2] - kmin);
@@ -244,7 +249,6 @@ static const double fract = 1e-6;
 bool NearlyEqual(double v1, double v2)
 {
   double tol = fract * MIN(fabs(v1), fabs(v2));
-  bool res = fabs(v1 - v2) < tol;
   return fabs(v1 - v2) < tol;
 }
 
