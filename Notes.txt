@@ -191,3 +191,7 @@ between the files.
 ZMerge _almost_ works. It writes files but some bits
 of them seem to be full of zeros instead of data.
 Commit anyway and try testing with smaller data files.
+Seems to work with small files.
+Runnng the small files in detail I found some errors in
+the code that figured out what to move. I now seem to
+get lovely outputs for small files.

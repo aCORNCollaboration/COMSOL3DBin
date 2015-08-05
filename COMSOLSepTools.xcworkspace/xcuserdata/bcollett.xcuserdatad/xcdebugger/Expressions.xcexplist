@@ -3,25 +3,31 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "CD3WriteBinary:COMSOLData3D.c">
+         contextName = "XYCompatible(CD3DataTag const*, CD3DataTag const*):COMSOLZMerge.cpp">
       </ContextState>
       <ContextState
          contextName = "MergeData(CD3DataTag const*, CD3DataTag const*, CD3DataTag*):COMSOLZMerge.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "outd-&gt;mField+lowsize">
+               value = "gOutName">
+            </PersistentString>
+            <PersistentString
+               value = "hiz">
             </PersistentString>
             <PersistentString
                value = "lowsize">
             </PersistentString>
             <PersistentString
-               value = "gOutName">
-            </PersistentString>
-            <PersistentString
                value = "hiz-&gt;mField+histart">
             </PersistentString>
             <PersistentString
-               value = "hiz">
+               value = "outd-&gt;mField+lowsize">
+            </PersistentString>
+            <PersistentString
+               value = "hiz-&gt;mField[histart+1]">
+            </PersistentString>
+            <PersistentString
+               value = "outd-&gt;mField[lowsize+i]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -41,6 +47,9 @@
       </ContextState>
       <ContextState
          contextName = "CD3ListPointIn:CD3List.c">
+      </ContextState>
+      <ContextState
+         contextName = "CD3WriteBinary:COMSOLData3D.c">
       </ContextState>
       <ContextState
          contextName = "ICylinderPointIn:Geometries.c">
@@ -70,9 +79,6 @@
       </ContextState>
       <ContextState
          contextName = "CDInit:COMSOLData.c">
-      </ContextState>
-      <ContextState
-         contextName = "XYCompatible(CD3DataTag const*, CD3DataTag const*):COMSOLZMerge.cpp">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

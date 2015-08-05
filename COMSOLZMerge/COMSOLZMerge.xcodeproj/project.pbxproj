@@ -11,7 +11,8 @@
 		180CAB371B72821F004C2836 /* COMSOLData2D.c in Sources */ = {isa = PBXBuildFile; fileRef = 180CAB301B72821F004C2836 /* COMSOLData2D.c */; };
 		180CAB381B72821F004C2836 /* COMSOLData3D.c in Sources */ = {isa = PBXBuildFile; fileRef = 180CAB321B72821F004C2836 /* COMSOLData3D.c */; };
 		180CAB391B72821F004C2836 /* ReadField.c in Sources */ = {isa = PBXBuildFile; fileRef = 180CAB341B72821F004C2836 /* ReadField.c */; };
-		180CAB3B1B728231004C2836 /* COMSOLZMerge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 180CAB3A1B728231004C2836 /* COMSOLZMerge.cpp */; };
+		180CAB3B1B728231004C2836 /* COMSOL3DBin in Sources */ = {isa = PBXBuildFile; fileRef = 180CAB3A1B728231004C2836 /* COMSOL3DBin */; };
+		18567C7B1B72B47A006775BD /* COMSOLZMerge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18567C7A1B72B47A006775BD /* COMSOLZMerge.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -36,7 +37,8 @@
 		180CAB331B72821F004C2836 /* COMSOLData3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COMSOLData3D.h; sourceTree = "<group>"; };
 		180CAB341B72821F004C2836 /* ReadField.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ReadField.c; sourceTree = "<group>"; };
 		180CAB351B72821F004C2836 /* ReadField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadField.h; sourceTree = "<group>"; };
-		180CAB3A1B728231004C2836 /* COMSOLZMerge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = COMSOLZMerge.cpp; path = ../../COMSOL3DBin/COMSOLZMerge.cpp; sourceTree = "<group>"; };
+		180CAB3A1B728231004C2836 /* COMSOL3DBin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COMSOL3DBin; sourceTree = "<group>"; };
+		18567C7A1B72B47A006775BD /* COMSOLZMerge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = COMSOLZMerge.cpp; path = ../COMSOL3DBin/COMSOLZMerge.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,9 @@
 		180CAB181B7281BC004C2836 = {
 			isa = PBXGroup;
 			children = (
+				18567C7A1B72B47A006775BD /* COMSOLZMerge.cpp */,
+				180CAB3A1B728231004C2836 /* COMSOL3DBin */,
+				180CAB2D1B72821F004C2836 /* CDSources */,
 				180CAB231B7281BC004C2836 /* COMSOLZMerge */,
 				180CAB221B7281BC004C2836 /* Products */,
 			);
@@ -69,8 +74,6 @@
 		180CAB231B7281BC004C2836 /* COMSOLZMerge */ = {
 			isa = PBXGroup;
 			children = (
-				180CAB3A1B728231004C2836 /* COMSOLZMerge.cpp */,
-				180CAB2D1B72821F004C2836 /* CDSources */,
 			);
 			path = COMSOLZMerge;
 			sourceTree = "<group>";
@@ -88,7 +91,7 @@
 				180CAB351B72821F004C2836 /* ReadField.h */,
 			);
 			name = CDSources;
-			path = ../../CDSources;
+			path = ../CDSources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -147,7 +150,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				180CAB3B1B728231004C2836 /* COMSOLZMerge.cpp in Sources */,
+				18567C7B1B72B47A006775BD /* COMSOLZMerge.cpp in Sources */,
+				180CAB3B1B728231004C2836 /* COMSOL3DBin in Sources */,
 				180CAB361B72821F004C2836 /* COMSOLData.c in Sources */,
 				180CAB381B72821F004C2836 /* COMSOLData3D.c in Sources */,
 				180CAB391B72821F004C2836 /* ReadField.c in Sources */,
@@ -236,6 +240,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = CDSources;
 			};
 			name = Debug;
 		};
@@ -243,6 +248,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = CDSources;
 			};
 			name = Release;
 		};
@@ -265,6 +271,7 @@
 				180CAB2A1B7281BC004C2836 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

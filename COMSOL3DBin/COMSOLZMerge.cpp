@@ -21,7 +21,6 @@
 #include <stdlib.h>
 #include <math.h>
 #include "COMSOLData3D.h"
-#include "CD3List.h"
 
 CDError ProcessArguments(int argc, const char** argv);
 CDError MergeData(const CD3Data* ind1, const CD3Data* ind2, CD3Data* outd);
@@ -134,7 +133,7 @@ CDError MergeData(const CD3Data* ind1, const CD3Data* ind2, CD3Data* outd)
   //
   const CD3Data* hiz = (lowz == ind1) ? ind2 : ind1;
   unsigned int nz = lowz->mNVal[2];
-  unsigned int kmin = (lowz->mMax[2] - hiz->mMin[2]) / lowz->mDelta[2];
+  unsigned int kmin = 1+((unsigned int)((lowz->mMax[2] - hiz->mMin[2]) / lowz->mDelta[2]));
   int nNew = (hiz->mMax[2] - lowz->mMax[2]) / hiz->mDelta[2];
   if (nNew <= 0) {
     fprintf(stderr, "No value to copy from high Z file.\n");
@@ -174,13 +173,18 @@ CDError MergeData(const CD3Data* ind1, const CD3Data* ind2, CD3Data* outd)
   memcpy(outd->mField, lowz->mField, lowsize * sizeof(double));
   uint64_t hisize = hiz->mNVal[0];
   hisize *= hiz->mNVal[1];
-  hisize *= (hiz->mNVal[2] - kmin);
+  hisize *= nNew;
   hisize *= 3;    // 3 doubles at each point!
   uint64_t histart = hiz->mNVal[0];
   histart *= hiz->mNVal[1];
   histart *= kmin;
   histart *= 3;    // 3 doubles at each point!
-  memcpy(outd->mField+lowsize, hiz->mField + histart, hisize * sizeof(double));
+  outd->mField[lowsize] = hiz->mField[histart];
+  for (uint64_t i = 0; i < hisize; i++) {
+    double newV = hiz->mField[histart+i];
+    outd->mField[lowsize+i] = newV;
+  }
+//  memcpy(&outd->mField[lowsize], &hiz->mField[histart], hisize * sizeof(double));
   //
   //  Make up a name.
   //
