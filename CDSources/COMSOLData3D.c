@@ -735,13 +735,13 @@ static CDError Init2D(CD3Data* dp, const CDData* cdp)
       //
       //  x inActive. Check for Ey and Ez.
       //
-      if (strcmp(cdp->mExprNames[3], "Ey") != 0) {
-        fprintf(stderr, "First expression '%s' should be 'Ex'.\n",
+      if (strcmp(cdp->mExprNames[3], "es.Ey") != 0) {
+        fprintf(stderr, "First expression '%s' should be 'es.Ey'.\n",
                 cdp->mExprNames[3]);
         return kCDBadStructure;
       }
-      if (strcmp(cdp->mExprNames[4], "Ez") != 0) {
-        fprintf(stderr, "Second expression '%s' should be 'Ey'.\n",
+      if (strcmp(cdp->mExprNames[4], "es.Ez") != 0) {
+        fprintf(stderr, "Second expression '%s' should be 'es.Ez'.\n",
                 cdp->mExprNames[4]);
         return kCDBadStructure;
       }
@@ -756,15 +756,15 @@ static CDError Init2D(CD3Data* dp, const CDData* cdp)
       //
       //  y inActive. Check for Ex and Ez.
       //
-      if (strcmp(cdp->mExprNames[3], "Ex") != 0) {
+      if (strcmp(cdp->mExprNames[3], "es.Ex") != 0) {
         fprintf(stderr,
-                "First expression '%s' should be 'Ex'.\n",
+                "First expression '%s' should be 'es.Ex'.\n",
                 cdp->mExprNames[3]);
         return kCDBadStructure;
       }
-      if (strcmp(cdp->mExprNames[4], "Ez") != 0) {
+      if (strcmp(cdp->mExprNames[4], "es.Ez") != 0) {
         fprintf(stderr,
-                "Second expression '%s' should be 'Ey'.\n",
+                "Second expression '%s' should be 'es.Ez'.\n",
                 cdp->mExprNames[4]);
         return kCDBadStructure;
       }

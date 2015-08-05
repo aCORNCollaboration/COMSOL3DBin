@@ -106,13 +106,13 @@ CDError CD2Init(CD2Data* dp, const char* fname)
       //  x inActive. Check for Ey and Ez.
       //
       if (strcmp(cData.mExprNames[3], "es.Ey") != 0) {
-        fprintf(stderr, "First expression '%s' should be 'Ex'.\n",
+        fprintf(stderr, "First expression '%s' should be 'es.Ey'.\n",
                 cData.mExprNames[3]);
         theErr = kCDBadStructure;
         goto ErrorExit;
       }
       if (strcmp(cData.mExprNames[4], "es.Ez") != 0) {
-        fprintf(stderr, "Second expression '%s' should be 'Ey'.\n",
+        fprintf(stderr, "Second expression '%s' should be 'es.Ey'.\n",
                 cData.mExprNames[4]);
         theErr = kCDBadStructure;
         goto ErrorExit;
@@ -124,13 +124,13 @@ CDError CD2Init(CD2Data* dp, const char* fname)
       //  y inActive. Check for Ex and Ez.
       //
       if (strcmp(cData.mExprNames[3], "es.Ex") != 0) {
-        fprintf(stderr, "First expression '%s' should be 'Ex'.\n",
+        fprintf(stderr, "First expression '%s' should be 'es.Ex'.\n",
                 cData.mExprNames[3]);
         theErr = kCDBadStructure;
         goto ErrorExit;
       }
       if (strcmp(cData.mExprNames[4], "es.Ez") != 0) {
-        fprintf(stderr, "Second expression '%s' should be 'Ey'.\n",
+        fprintf(stderr, "Second expression '%s' should be 'es.Ez'.\n",
                 cData.mExprNames[4]);
         theErr = kCDBadStructure;
         goto ErrorExit;
@@ -139,16 +139,16 @@ CDError CD2Init(CD2Data* dp, const char* fname)
       
     case 2:
       //
-      //  x inActive. Check for Ex and Ey.
+      //  z inActive. Check for Ex and Ey.
       //
       if (strcmp(cData.mExprNames[3], "es.Ex") != 0) {
-        fprintf(stderr, "First expression '%s' should be 'Ex'.\n",
+        fprintf(stderr, "First expression '%s' should be 'es.Ex'.\n",
                 cData.mExprNames[3]);
         theErr = kCDBadStructure;
         goto ErrorExit;
       }
       if (strcmp(cData.mExprNames[4], "es.Ey") != 0) {
-        fprintf(stderr, "Second expression '%s' should be 'Ey'.\n",
+        fprintf(stderr, "Second expression '%s' should be 'es.Ey'.\n",
                 cData.mExprNames[4]);
         theErr = kCDBadStructure;
         goto ErrorExit;

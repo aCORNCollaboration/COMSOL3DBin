@@ -5,7 +5,7 @@
 //  Driver for the simplified COMSOLTxt2Bin tool that ONLY converts
 //  COMSOL .txt or FEMM .txt files into my .bin files.
 //
-//  COMSOL3D2Bin [-f] <textfile1.txt> <textfile2.tx> ...
+//  COOMSOLTxt2Bin [-f] <textfile1.txt> <textfile2.tx> ...
 //
 //  will produce textfile.bin.
 //  -f  Process a FEMM input file rather than a
@@ -20,7 +20,6 @@
 #include <stdlib.h>
 #include <math.h>
 #include "COMSOLData3D.h"
-#include "CD3List.h"
 
 CDError ProcessArguments(int argc, const char** argv);
 CDError DoFile(const char* filename);

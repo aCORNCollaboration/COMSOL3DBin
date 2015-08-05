@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:COMSOLZMerge/COMSOLZMerge.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:COMSOLTxt2Bin/COMSOLTxt2Bin.xcodeproj">
    </FileRef>
    <FileRef

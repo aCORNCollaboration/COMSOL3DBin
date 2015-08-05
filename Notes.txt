@@ -177,3 +177,17 @@ switching to C++ had made it more picky about return types.
 Fixed a bunch of CDError returns. Seems to run fine.
 Commit.
 
+8/5/15
+I have processed all the COMSOL files from NG6M13 with
+COMSOLTxt2Bin and the results look FINE!
+
+Now really need a program to merge two files. Set a VERY
+limited goal for COMSOLZMerge. It takes 2 binary filenames
+and concatenates the two files in the z direction. It
+requires that the two have the same x and y limits and
+that all three deltas match. It can deal with overlap
+between the files.
+
+ZMerge _almost_ works. It writes files but some bits
+of them seem to be full of zeros instead of data.
+Commit anyway and try testing with smaller data files.

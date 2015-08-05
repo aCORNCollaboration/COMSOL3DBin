@@ -1,0 +1,272 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		180CAB361B72821F004C2836 /* COMSOLData.c in Sources */ = {isa = PBXBuildFile; fileRef = 180CAB2E1B72821F004C2836 /* COMSOLData.c */; };
+		180CAB371B72821F004C2836 /* COMSOLData2D.c in Sources */ = {isa = PBXBuildFile; fileRef = 180CAB301B72821F004C2836 /* COMSOLData2D.c */; };
+		180CAB381B72821F004C2836 /* COMSOLData3D.c in Sources */ = {isa = PBXBuildFile; fileRef = 180CAB321B72821F004C2836 /* COMSOLData3D.c */; };
+		180CAB391B72821F004C2836 /* ReadField.c in Sources */ = {isa = PBXBuildFile; fileRef = 180CAB341B72821F004C2836 /* ReadField.c */; };
+		180CAB3B1B728231004C2836 /* COMSOLZMerge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 180CAB3A1B728231004C2836 /* COMSOLZMerge.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		180CAB1F1B7281BC004C2836 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		180CAB211B7281BC004C2836 /* COMSOLZMerge */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = COMSOLZMerge; sourceTree = BUILT_PRODUCTS_DIR; };
+		180CAB2E1B72821F004C2836 /* COMSOLData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = COMSOLData.c; sourceTree = "<group>"; };
+		180CAB2F1B72821F004C2836 /* COMSOLData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COMSOLData.h; sourceTree = "<group>"; };
+		180CAB301B72821F004C2836 /* COMSOLData2D.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = COMSOLData2D.c; sourceTree = "<group>"; };
+		180CAB311B72821F004C2836 /* COMSOLData2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COMSOLData2D.h; sourceTree = "<group>"; };
+		180CAB321B72821F004C2836 /* COMSOLData3D.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = COMSOLData3D.c; sourceTree = "<group>"; };
+		180CAB331B72821F004C2836 /* COMSOLData3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COMSOLData3D.h; sourceTree = "<group>"; };
+		180CAB341B72821F004C2836 /* ReadField.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ReadField.c; sourceTree = "<group>"; };
+		180CAB351B72821F004C2836 /* ReadField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadField.h; sourceTree = "<group>"; };
+		180CAB3A1B728231004C2836 /* COMSOLZMerge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = COMSOLZMerge.cpp; path = ../../COMSOL3DBin/COMSOLZMerge.cpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		180CAB1E1B7281BC004C2836 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		180CAB181B7281BC004C2836 = {
+			isa = PBXGroup;
+			children = (
+				180CAB231B7281BC004C2836 /* COMSOLZMerge */,
+				180CAB221B7281BC004C2836 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		180CAB221B7281BC004C2836 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				180CAB211B7281BC004C2836 /* COMSOLZMerge */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		180CAB231B7281BC004C2836 /* COMSOLZMerge */ = {
+			isa = PBXGroup;
+			children = (
+				180CAB3A1B728231004C2836 /* COMSOLZMerge.cpp */,
+				180CAB2D1B72821F004C2836 /* CDSources */,
+			);
+			path = COMSOLZMerge;
+			sourceTree = "<group>";
+		};
+		180CAB2D1B72821F004C2836 /* CDSources */ = {
+			isa = PBXGroup;
+			children = (
+				180CAB2E1B72821F004C2836 /* COMSOLData.c */,
+				180CAB2F1B72821F004C2836 /* COMSOLData.h */,
+				180CAB301B72821F004C2836 /* COMSOLData2D.c */,
+				180CAB311B72821F004C2836 /* COMSOLData2D.h */,
+				180CAB321B72821F004C2836 /* COMSOLData3D.c */,
+				180CAB331B72821F004C2836 /* COMSOLData3D.h */,
+				180CAB341B72821F004C2836 /* ReadField.c */,
+				180CAB351B72821F004C2836 /* ReadField.h */,
+			);
+			name = CDSources;
+			path = ../../CDSources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		180CAB201B7281BC004C2836 /* COMSOLZMerge */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 180CAB281B7281BC004C2836 /* Build configuration list for PBXNativeTarget "COMSOLZMerge" */;
+			buildPhases = (
+				180CAB1D1B7281BC004C2836 /* Sources */,
+				180CAB1E1B7281BC004C2836 /* Frameworks */,
+				180CAB1F1B7281BC004C2836 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = COMSOLZMerge;
+			productName = COMSOLZMerge;
+			productReference = 180CAB211B7281BC004C2836 /* COMSOLZMerge */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		180CAB191B7281BC004C2836 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0620;
+				ORGANIZATIONNAME = "Brian Collett";
+				TargetAttributes = {
+					180CAB201B7281BC004C2836 = {
+						CreatedOnToolsVersion = 6.2;
+					};
+				};
+			};
+			buildConfigurationList = 180CAB1C1B7281BC004C2836 /* Build configuration list for PBXProject "COMSOLZMerge" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 180CAB181B7281BC004C2836;
+			productRefGroup = 180CAB221B7281BC004C2836 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				180CAB201B7281BC004C2836 /* COMSOLZMerge */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		180CAB1D1B7281BC004C2836 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				180CAB3B1B728231004C2836 /* COMSOLZMerge.cpp in Sources */,
+				180CAB361B72821F004C2836 /* COMSOLData.c in Sources */,
+				180CAB381B72821F004C2836 /* COMSOLData3D.c in Sources */,
+				180CAB391B72821F004C2836 /* ReadField.c in Sources */,
+				180CAB371B72821F004C2836 /* COMSOLData2D.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		180CAB261B7281BC004C2836 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		180CAB271B7281BC004C2836 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		180CAB291B7281BC004C2836 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		180CAB2A1B7281BC004C2836 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		180CAB1C1B7281BC004C2836 /* Build configuration list for PBXProject "COMSOLZMerge" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				180CAB261B7281BC004C2836 /* Debug */,
+				180CAB271B7281BC004C2836 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		180CAB281B7281BC004C2836 /* Build configuration list for PBXNativeTarget "COMSOLZMerge" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				180CAB291B7281BC004C2836 /* Debug */,
+				180CAB2A1B7281BC004C2836 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 180CAB191B7281BC004C2836 /* Project object */;
+}

@@ -3,7 +3,38 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "MergeData(CD3DataTag const*, CD3DataTag const*, CD3DataTag*):COMSOLZMerge.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "lowsize">
+            </PersistentString>
+            <PersistentString
+               value = "outd-&gt;mField+lowsize">
+            </PersistentString>
+            <PersistentString
+               value = "gOutName">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "AddGeometryTo:GSSmooth.c">
+      </ContextState>
+      <ContextState
+         contextName = "CDParseHeader:COMSOLData.c">
+         <PersistentStrings>
+            <PersistentString
+               value = "modelName">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CD3Init:COMSOLData3D.c">
+      </ContextState>
+      <ContextState
+         contextName = "CD3ListPointIn:CD3List.c">
+      </ContextState>
+      <ContextState
+         contextName = "ICylinderPointIn:Geometries.c">
       </ContextState>
       <ContextState
          contextName = "ICylinderInit:Geometries.c">
@@ -29,18 +60,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "CD3ListPointIn:CD3List.c">
+         contextName = "CDInit:COMSOLData.c">
       </ContextState>
       <ContextState
-         contextName = "CDParseHeader:COMSOLData.c">
-         <PersistentStrings>
-            <PersistentString
-               value = "modelName">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ICylinderPointIn:Geometries.c">
+         contextName = "XYCompatible(CD3DataTag const*, CD3DataTag const*):COMSOLZMerge.cpp">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

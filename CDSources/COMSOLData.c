@@ -144,13 +144,13 @@ CDError CDInit(CDData* dp, const char* fname)
       fscanf(ifp, "%lg", &v);
       dp->mDStore[expr][line] = v;
 //      printf("%f,",v);
-      if (expr < dp->mNDimension) {
+//      if (expr < dp->mNDimension) {
         if (v < dp->mRange[expr].mMin) {
           dp->mRange[expr].mMin = v;
         } else if (v > dp->mRange[expr].mMax) {
           dp->mRange[expr].mMax = v;
         }
-      }
+//      }
     }
 //  printf("\n");
   }

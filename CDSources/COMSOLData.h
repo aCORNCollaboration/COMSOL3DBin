@@ -62,6 +62,7 @@ typedef enum CDErrorTag {
   kCDBadGeom,
   kCDNoArgs,
   kCDBadWrite,
+  kCDXYCompatFail,
   kCDError
 } CDError;
 
