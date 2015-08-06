@@ -195,3 +195,7 @@ Seems to work with small files.
 Runnng the small files in detail I found some errors in
 the code that figured out what to move. I now seem to
 get lovely outputs for small files.
+I rewrote the code to compute the overlap between two
+files and Merge now appears to work perfectly on the
+big files from NG6M13. Commit.
+

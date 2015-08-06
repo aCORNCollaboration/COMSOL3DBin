@@ -133,12 +133,34 @@ CDError MergeData(const CD3Data* ind1, const CD3Data* ind2, CD3Data* outd)
   //
   const CD3Data* hiz = (lowz == ind1) ? ind2 : ind1;
   unsigned int nz = lowz->mNVal[2];
-  unsigned int kmin = 1+((unsigned int)((lowz->mMax[2] - hiz->mMin[2]) / lowz->mDelta[2]));
   int nNew = (hiz->mMax[2] - lowz->mMax[2]) / hiz->mDelta[2];
   if (nNew <= 0) {
     fprintf(stderr, "No value to copy from high Z file.\n");
     return kCDError;
   }
+  //
+  //  Figure out where we start in hiz. Work up in z from the
+  //  bottom of hiz until we pass the top of the piece that
+  //  came from lowz.
+  //
+  int kMin;
+  bool found = false;
+  for (kMin = 0; kMin < hiz->mNVal[2]; kMin++) {
+    double newZ = hiz->mMin[2] + kMin * hiz->mDelta[2];
+    if (newZ > lowz->mMax[2]) {
+      found = true;
+      break;
+    }
+  }
+  if (!found) {
+    fprintf(stderr, "Failed to evaluate overlap between fields.\n");
+    return kCDError;
+  }
+  //
+  //  kMin is now the lowest index that we write.
+  //  Figure out how many z planes we need.
+  //
+  nNew = hiz->mNVal[2] - kMin;
   nz += nNew;
   //
   //  Start filling in out. We know the ranges, deltas, and numbers
@@ -177,7 +199,7 @@ CDError MergeData(const CD3Data* ind1, const CD3Data* ind2, CD3Data* outd)
   hisize *= 3;    // 3 doubles at each point!
   uint64_t histart = hiz->mNVal[0];
   histart *= hiz->mNVal[1];
-  histart *= kmin;
+  histart *= kMin;
   histart *= 3;    // 3 doubles at each point!
   outd->mField[lowsize] = hiz->mField[histart];
   for (uint64_t i = 0; i < hisize; i++) {
