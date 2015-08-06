@@ -107,95 +107,85 @@ of the Geoms in the list.
 
 That is all written. Commit it now and test tomorrow.
 
-Trying to test has shown up a pair of inter-related that I have
-previously ignored. A COMSOL file does not always hav a name on the
-Model line. If that name is missing then header processing goes
-completely screwy without any apparent warning AND you end up
-freeing an mExpNames array that has never been alloc'd. I propose
-to fix both.
+Trying to test has shown up a pair of inter-related that I have previously
+ignored. A COMSOL file does not always hav a name on the Model line. If that
+name is missing then header processing goes completely screwy without any
+apparent warning AND you end up freeing an mExpNames array that has never been
+alloc'd. I propose to fix both.
 
-Fixed. I tweaked the way that cylinders decide whether points are
-inside to make sure that they are put in symmetrically. With that
-the system works beautifully, at least for interior cylinders.
+Fixed. I tweaked the way that cylinders decide whether points are inside to
+make sure that they are put in symmetrically. With that the system works
+beautifully, at least for interior cylinders.
 
 I now need to implement torii. But commit this first.
-In implementing torii I have slimmed down the cylinder test (and
-had an idea for slimming it further) and added a tolerance param
-to the PointIn tests so that you pass if you are within half a
-spacing of the right answer.
-I originally had three separate cylinder tests, one for each
-direction. I have now reduced that to 1 by introducing index
-variables that are assigned to actual 0,1,2 values depending on
-the orientation of the cylinder. Index 2 is the cylinder axis
-and the other two are chosen to make a right handed set.
-I now realise that this can be initialised when we build the
-Geom and simply used in the test. The three indices will
-replace the single mAxis variable.
+In implementing torii I have slimmed down the cylinder test (and had an idea
+for slimming it further) and added a tolerance param to the PointIn tests so
+that you pass if you are within half a spacing of the right answer.
+I originally had three separate cylinder tests, one for each direction.
+I have now reduced that to 1 by introducing index variables that are assigned
+to actual 0,1,2 values depending on the orientation of the cylinder. Index 2 is
+the cylinder axis and the other two are chosen to make a right handed set. I
+now realise that this can be initialised when we build the Geom and simply
+used in the test. The three indices will replace the single mAxis variable.
 
-I changed the language setting to C89 and cleaned some things
-up so that it now builds without warnings (though I think that
-I don't have the warning level set very high). Turned up warnings
-and made them all go away!
+I changed the language setting to C89 and cleaned some things up so that it
+now builds without warnings (though I think that I don't have the warning level
+set very high). Turned up warnings and made them all go away!
 
-Then I ran the static analyzer and threw up 23 issues! Most of
-them were drivel, though I did catch a few not very interesting
-memory leaks.
+Then I ran the static analyzer and threw up 23 issues! Most of them were drivel,
+though I did catch a few not very interesting memory leaks.
 
 8/4/15
-As I pull data from NG6Mirror13 (the ultimate model!) I find
-that it would be VERY useful to be able to merge two or
-more binary fields into a single file. Obviously this would
-only work if the regions are the same basic shape and adjoin
-or overlap in some direction.
+As I pull data from NG6Mirror13 (the ultimate model!) I find that it would be
+VERY useful to be able to merge two or more binary fields into a single file.
+Obviously this would only work if the regions are the same basic shape and
+adjoin or overlap in some direction.
 
-This makes me think that I might want to slightly restructure
-COMSOL3DBin. At the moment there are two basic parts, the
-low-level pure C code to read and write text and binary
-files and the driver program that uses that low-level code.
-The driver is getting complicated as it handles more different
-kinds of files and does averaging as well as file conversion.
-It would be possible to add file merging but I think it would
-be better to start splitting off different tools. Before I
-do anything else I need to commit the source to date and then
-learn how to fork the code.
+This makes me think that I might want to slightly restructure COMSOL3DBin.
+At the moment there are two basic parts, the low-level pure C code to read and
+write text and binary files and the driver program that uses the low-level code.
+The driver is getting complicated as it handles more different kinds of files
+and does averaging as well as file conversion. It would be possible to add file
+merging but I think it would be better to start splitting off different tools.
+Before I do anything else I need to commit the source to date and then learn
+how to fork the code.
 
 I have used XCode to create a branch called SepTools.
 Start by creating a pruned version of the main tool that ONLY
 converts .txt files to .bin files. Call it COMSOLTxt2Bin.
-Start by converting the project to a Workspace, which you
-do by doing a File|Save As Workspace. I call the new space
-COMSOLSepTools. I am not at all convinced that I understand
-the workspace. Continue anyway.
-AHA, when I went to create a new project I found an option
-to add it to a workspace. I added it to the new one and
-things now look the way I might expect.
+Start by converting the project to a Workspace, which you do by doing a
+File|Save As Workspace. I call the new space COMSOLSepTools. I am not at all
+convinced that I understand the workspace. Continue anyway.
+AHA, when I went to create a new project I found an option to add it to a
+workspace. I added it to the new one and things now look the way I might expect.
 New project gets a new main called COMSOLTxt2Bin.cpp.
 
-Copied onto MacPro where I found that I was not building
-the right project. Redid the new project and found that
-switching to C++ had made it more picky about return types.
-Fixed a bunch of CDError returns. Seems to run fine.
+Copied onto MacPro where I found that I was not building the right project.
+Redid the new project and found that switching to C++ had made it more picky
+about return types. Fixed a bunch of CDError returns. Seems to run fine.
 Commit.
 
 8/5/15
-I have processed all the COMSOL files from NG6M13 with
-COMSOLTxt2Bin and the results look FINE!
+I have processed all the COMSOL files from NG6M13 with COMSOLTxt2Bin and the
+results look FINE!
 
-Now really need a program to merge two files. Set a VERY
-limited goal for COMSOLZMerge. It takes 2 binary filenames
-and concatenates the two files in the z direction. It
-requires that the two have the same x and y limits and
-that all three deltas match. It can deal with overlap
-between the files.
+Now really need a program to merge two files. Set a VERY limited goal for
+COMSOLZMerge. It takes 2 binary filenames and concatenates the two files in
+the z direction. It requires that the two have the same x and y limits and
+that all three deltas match. It can deal with overlap between the files.
 
-ZMerge _almost_ works. It writes files but some bits
-of them seem to be full of zeros instead of data.
-Commit anyway and try testing with smaller data files.
+ZMerge _almost_ works. It writes files but some bits of them seem to be full
+of zeros instead of data. Commit anyway and try testing with smaller data files.
 Seems to work with small files.
-Runnng the small files in detail I found some errors in
-the code that figured out what to move. I now seem to
-get lovely outputs for small files.
-I rewrote the code to compute the overlap between two
-files and Merge now appears to work perfectly on the
-big files from NG6M13. Commit.
+Runnng the small files in detail I found some errors in the code that figured
+out what to move. I now seem to get lovely outputs for small files.
+I rewrote the code to compute the overlap between two files and Merge now
+appears to work perfectly on the big files from NG6M13. Commit.
 
+
+I have restructured the directories to move the xcode projects out of the
+repository.
+I have created a new skeleton COMSOLSmooth from a mixture of COMSOL3DBin and
+COMSOLZMerge and need to flesh it out.
+Because I am working here on tools that will NOT go to Fred there is no reason
+not to work in C++ and so I am going to redo the geometries and lists in C++.

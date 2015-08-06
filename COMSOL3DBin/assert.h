@@ -16,7 +16,15 @@
 
 extern int gBC_ASSERT_ABORT;
 
+#if defined(__cplusplus)
+extern "C" {
+#endif
+
 void BC_DO_ASSERT(const char* testStr, const char* fileName, int lineNumber);
+
+#if defined(__cplusplus)
+}
+#endif
 
 #define assert(x) if (!(x)) BC_DO_ASSERT("x", __FILE__, __LINE__)
 #endif

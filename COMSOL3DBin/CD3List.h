@@ -51,6 +51,10 @@ typedef struct CD3ListTag {
   int mNArg;
 } CD3List;
 
+#if defined(__cplusplus)
+extern "C" {
+#endif
+
 //
 //
 //	Constructor and destructor.
@@ -76,6 +80,9 @@ int CD3ListPointIn(CD3List* l, Point3D* p, double tol);
 //bool CD3ListAddGeomTo(CD3List* l, uint8_t* type, CD3Data* d);
 //
 //
+#if defined(__cplusplus)
+}
+#endif
 
 
 #endif /* defined(__CD3List__) */

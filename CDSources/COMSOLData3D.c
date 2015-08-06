@@ -125,8 +125,7 @@ ErrorExit:
 //
 //  InitFEMM does the same for a file extracted from FEMM
 //  and written by Matlab or Octave.
-//  This is somewhat simpler because the file must hold 2D data
-//  in the form
+//  This is somewhat simpler because the file must hold 2D data in the form
 //  x y Ex Ey
 //  stored with the y dimension varying fastest.
 //  UNLIKE the COMSOL data we have no information on how many
