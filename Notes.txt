@@ -189,3 +189,14 @@ I have created a new skeleton COMSOLSmooth from a mixture of COMSOL3DBin and
 COMSOLZMerge and need to flesh it out.
 Because I am working here on tools that will NOT go to Fred there is no reason
 not to work in C++ and so I am going to redo the geometries and lists in C++.
+
+8/6/15
+Implemented a new COMSOLSmooth. I did convert the idea of a Smoothable to
+C++ but left the Geometries and CD3Lists as they were because they already
+work. Committed the version before testing.
+Then I tested it and it really seems to work! Smoothing a low mesh size
+S3DTest1 model makes a remarkable difference in the noise and it preserves
+the insides of the wires as it should.
+S3DTest4 model shows that torii are also working and that smoothing is
+respecting the boundaries. COMMIT.
+

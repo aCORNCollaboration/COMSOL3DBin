@@ -28,6 +28,7 @@
 #include <math.h>
 #include <string.h>
 #include <stdlib.h>
+#include <errno.h>
 #include "assert.h"
 #include "GSSmooth.h"
 #include "COMSOLData3D.h"
@@ -78,8 +79,8 @@ bool CD3ListReadGeom(CD3List* l, const char* inFilename)
    */
   FILE* ifp = fopen(inFilename, "rt");
   if  (NULL == ifp) {
-    fprintf(stderr, "Cannot open geometry file %s.\n",
-            inFilename);
+    fprintf(stderr, "CD3ListReadGeom: Error %d, cannot open geometry file %s.\n",
+            errno, inFilename);
     return false;
   }
   /*
