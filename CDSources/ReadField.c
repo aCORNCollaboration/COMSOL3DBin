@@ -136,8 +136,10 @@ bool ParseFieldSet(CD3Data* dp, FILE* ifp)
 //
 bool ParseField(CD3Data* dp, const char* name)
 {
-  char* fieldName = "ParseField error";
+  const char* defaultFieldName = "Field name error.";
+  char* fieldName = NULL;
   bool success = false;
+  size_t nNameChar = -1;
   FILE* nIfp;
   if ((name == NULL) || (strlen(name) == 0)) {
     return false;
@@ -158,9 +160,23 @@ bool ParseField(CD3Data* dp, const char* name)
     return false;
   }
   oprintf("Loaded field %s.\n",name);
-  fieldName = (char*) malloc(strlen(name)+2);
-  strncpy(fieldName, name, strlen(name));
-  dp->mFieldName = fieldName;
+  nNameChar = strlen(name);
+  if ((nNameChar < 1) || (nNameChar > 256)) {
+    eprintf("ParseCField: field name %s too long or too short.\n",
+            name);
+    dp->mFieldName = defaultFieldName;
+  } else {
+    fieldName = (char*) malloc(nNameChar+2);
+    if (NULL == fieldName) {
+      eprintf("ParseCField: unable to allocate space for name %s.\n",
+              name);
+      dp->mFieldName = defaultFieldName;
+    } else {
+      strncpy(fieldName, name, nNameChar);
+      fieldName[nNameChar] = 0;
+      dp->mFieldName = fieldName;
+    }
+  }
   return true;
 }
 
@@ -277,12 +293,14 @@ bool FieldInField(const CD3Data* od, const CD3Data* nd)
   coord[1] = nd->mMin[1];
   coord[2] = nd->mMin[2];
   if (!SoftPtInBounds(od, coord)) {
+    SoftPtInBounds(od, coord);
     return false;
   }
   coord[0] = nd->mMax[0];
   coord[1] = nd->mMax[1];
   coord[2] = nd->mMax[2];
   if (!SoftPtInBounds(od, coord)) {
+    SoftPtInBounds(od, coord);
     return false;
   }
   return true;
@@ -338,9 +356,8 @@ bool SoftPtInBounds(const CD3Data* dp, const double coord[3])
 {
   int i;
   for (i = 0; i < 3; i++) {
-    double eps = (fabs(coord[i]) < 1e-6) ? 1e-6
-    : 1e-6 * coord[i];
-    if (((coord[i] - dp->mMin[i]) < eps) ||
+    double eps = (fabs(coord[i]) < 1e-6) ? 1e-6 : 1e-6 * fabs(coord[i]);
+    if (((coord[i] - dp->mMin[i]) < -eps) ||
         ((coord[i] - dp->mMax[i]) > eps)) {
       return false;
     }

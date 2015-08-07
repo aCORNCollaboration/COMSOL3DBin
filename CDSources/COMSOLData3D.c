@@ -393,7 +393,7 @@ const char* CD3GetNameAtPoint(const CD3Data* dp, const double coord[3])
   //
   for (i = 0; i < dp->mNSubField; i++) {
     if (PtInBounds(dp->mSubField[i], coord)) {
-      return dp->mSubField[i]->mFieldName;
+      return CD3GetNameAtPoint(dp->mSubField[i], coord);
     }
   }
   //
