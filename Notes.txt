@@ -92,7 +92,7 @@ commit these changes. COMMITED!
 Now to work on the Geometry problem.
 In doing that I have fallen out of love with the internal representation
 of the Geoms. The single large undifferentiated mParams array is not
-very readable. I am better of just putting all the properly named params
+very readable. I am better off just putting all the properly named params
 that you could want and just ignoring the ones that a particular Geom
 does not use. It is certainly no worse than putting 20 nameless params
 in each!
@@ -107,8 +107,8 @@ of the Geoms in the list.
 
 That is all written. Commit it now and test tomorrow.
 
-Trying to test has shown up a pair of inter-related that I have previously
-ignored. A COMSOL file does not always hav a name on the Model line. If that
+Trying to test has shown up a pair of inter-related bugs that I have previously
+ignored. A COMSOL file does not always have a name on the Model line. If that
 name is missing then header processing goes completely screwy without any
 apparent warning AND you end up freeing an mExpNames array that has never been
 alloc'd. I propose to fix both.
@@ -177,7 +177,7 @@ that all three deltas match. It can deal with overlap between the files.
 ZMerge _almost_ works. It writes files but some bits of them seem to be full
 of zeros instead of data. Commit anyway and try testing with smaller data files.
 Seems to work with small files.
-Runnng the small files in detail I found some errors in the code that figured
+Running the small files in detail I found some errors in the code that figured
 out what to move. I now seem to get lovely outputs for small files.
 I rewrote the code to compute the overlap between two files and Merge now
 appears to work perfectly on the big files from NG6M13. Commit.
